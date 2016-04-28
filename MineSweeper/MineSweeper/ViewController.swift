@@ -33,10 +33,10 @@ class DataSource: NSObject, NSCollectionViewDataSource {
     var firstMove = false
     dynamic var minesLeftCounter = 0
     dynamic var gameOver = false
-    var timer: NSTimer?
-    dynamic var clock = 0
 
     var cellsToRefresh = Set<NSIndexPath>()
+
+    @IBOutlet weak var timerLabel: TimerLabel!
 
     @IBOutlet weak var fieldCollectionView: NSCollectionView! {
         didSet {
@@ -51,18 +51,14 @@ class DataSource: NSObject, NSCollectionViewDataSource {
         fieldCollectionView.reloadData()
     }
 
-    func timerTick() {
-        clock += 1
-    }
-
     func startGame() {
         width = 16
         height = 16
         dataArray = [Int](count: width*height, repeatedValue: 0)
         placeMines(40)
         minesLeftCounter = 40
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(DataSource.timerTick), userInfo: nil, repeats: true)
-        clock = 0
+        timerLabel.reset()
+        timerLabel.start()
         firstMove = true
     }
 
@@ -94,19 +90,22 @@ class DataSource: NSObject, NSCollectionViewDataSource {
 
     func uncover(cellWithIndex: Int) -> Bool {
         cellsToRefresh = Set<NSIndexPath>()
-        if dataArray[cellWithIndex] == CellType.MINE || dataArray[cellWithIndex] == CellType.WRONG_FLAG {
+
+        let currentCell = dataArray[cellWithIndex]
+        if (currentCell == CellType.MINE) {
             if firstMove {
-                dataArray[cellWithIndex] = CellType.EMPTY   // a mine can not be uncovered on first click
-                placeMineAtRandom() // it should be moved to a random position
-                firstMove = false
+                dataArray[cellWithIndex] = CellType.EMPTY   // a mine should not be uncovered on first click
+                placeMineAtRandom()                         // it should be moved to a random free position
             } else {
-                Swift.print("Game over")
-                gameOver = true
+                timerLabel.stop()
+                print("GAME OVER")  // TODO: Put game over here
                 return true
             }
+        } else if (currentCell == CellType.EMPTY) {
+            cascade(cellWithIndex)
         }
-        cascade(cellWithIndex)
         fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
+        firstMove = false
         return false
     }
 
@@ -215,19 +214,20 @@ class DataSource: NSObject, NSCollectionViewDataSource {
     }
 
     func mineSet(atIndex: Int) {
-        switch dataArray[atIndex] {
-        case CellType.MINE:
-            minesLeftCounter -= 1
-            dataArray[atIndex] = CellType.RIGHT_FLAG
-        case CellType.RIGHT_FLAG:
-            minesLeftCounter += 1
-            dataArray[atIndex] = CellType.MINE
-        case CellType.WRONG_FLAG:
-            minesLeftCounter += 1
-            dataArray[atIndex] = CellType.EMPTY
-        default:
-            minesLeftCounter -= 1
+
+        let currentCell = dataArray[atIndex]
+        if currentCell == CellType.EMPTY {
             dataArray[atIndex] = CellType.WRONG_FLAG
+            minesLeftCounter -= 1
+        } else if currentCell == CellType.MINE {
+            dataArray[atIndex] = CellType.RIGHT_FLAG
+            minesLeftCounter += 1
+        } else if currentCell == CellType.RIGHT_FLAG {
+            dataArray[atIndex] = CellType.MINE
+            minesLeftCounter -= 1
+        } else if currentCell == CellType.WRONG_FLAG {
+            dataArray[atIndex] = CellType.EMPTY
+            minesLeftCounter += 1
         }
         fieldCollectionView.reloadItemsAtIndexPaths(Set<NSIndexPath>(arrayLiteral: NSIndexPath(forItem: atIndex, inSection: 0)))
     }
@@ -273,6 +273,30 @@ class CollectionViewItem: NSCollectionViewItem {
 
     override func rightMouseUp(theEvent: NSEvent) {
         dataSource.mineSet(index)
+    }
+}
+
+class TimerLabel: NSTextField {
+    var counter = 0
+    var timer: NSTimer!
+
+    func start() {
+        Swift.print("timer started")    // TODO
+        timer = NSTimer(timeInterval: 1, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
+    }
+
+    func stop() {
+        timer.invalidate()
+    }
+
+    func tick() {
+        Swift.print("counter")
+        counter += 1
+        stringValue = "Time: " + String(counter)
+    }
+
+    func reset() {
+        counter = 0
     }
 }
 

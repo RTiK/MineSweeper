@@ -670,17 +670,17 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="MineSweeper" customModuleProvider="target" sceneMemberID="viewController">
                     <visualEffectView key="view" appearanceType="vibrantDark" blendingMode="behindWindow" state="followsWindowActiveState" id="Dio-us-J1L">
-                        <rect key="frame" x="0.0" y="0.0" width="418" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="416" height="477"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <scrollView borderType="line" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="pDG-Lh-b1L">
-                                <rect key="frame" x="0.0" y="0.0" width="418" height="419"/>
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="pDG-Lh-b1L">
+                                <rect key="frame" x="0.0" y="0.0" width="416" height="416"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="IQb-TH-kRZ">
-                                    <rect key="frame" x="1" y="1" width="416" height="417"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="416" height="416"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView id="vmx-C8-eyW">
-                                            <rect key="frame" x="0.0" y="0.0" width="416" height="417"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="416" height="416"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" id="hpr-Fc-mNS">
                                                 <size key="itemSize" width="26" height="26"/>
@@ -703,7 +703,7 @@
                                 </scroller>
                             </scrollView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wRb-bm-1nx">
-                                <rect key="frame" x="18" y="439" width="104" height="17"/>
+                                <rect key="frame" x="18" y="436" width="114" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mines Left " id="I20-Rx-xoE">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -717,8 +717,16 @@
                                     </binding>
                                 </connections>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerLabel" customModule="MineSweeper" customModuleProvider="target">
+                                <rect key="frame" x="284" y="436" width="114" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Time Elapsed" id="l7h-6s-GxS">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pVe-Eg-LOl">
-                                <rect key="frame" x="169" y="432" width="81" height="32"/>
+                                <rect key="frame" x="168" y="429" width="81" height="32"/>
                                 <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v8u-lu-Amt">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -727,21 +735,6 @@
                                     <action selector="startButtonPressed:" target="pz9-qR-zEM" id="JrN-rq-8pN"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB">
-                                <rect key="frame" x="296" y="439" width="104" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Time Elapsed" id="l7h-6s-GxS">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="pz9-qR-zEM" name="displayPatternValue1" keyPath="self.clock" id="9fQ-dF-b32">
-                                        <dictionary key="options">
-                                            <string key="NSDisplayPattern">Time Elapsed: %{value1}@</string>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="pDG-Lh-b1L" firstAttribute="top" secondItem="pVe-Eg-LOl" secondAttribute="bottom" constant="20" id="1w7-9N-Uyr"/>
@@ -760,10 +753,11 @@
                 <customObject id="pz9-qR-zEM" customClass="DataSource" customModule="MineSweeper" customModuleProvider="target">
                     <connections>
                         <outlet property="fieldCollectionView" destination="vmx-C8-eyW" id="tYl-TU-dxy"/>
+                        <outlet property="timerLabel" destination="WFA-bY-VTB" id="xtz-KT-ExN"/>
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="75" y="784"/>
+            <point key="canvasLocation" x="74" y="782.5"/>
         </scene>
     </scenes>
 </document>
