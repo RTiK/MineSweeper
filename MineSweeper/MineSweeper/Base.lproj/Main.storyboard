@@ -718,8 +718,8 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerLabel" customModule="MineSweeper" customModuleProvider="target">
-                                <rect key="frame" x="284" y="436" width="114" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Time Elapsed" id="l7h-6s-GxS">
+                                <rect key="frame" x="294" y="436" width="104" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Time" id="l7h-6s-GxS">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -757,7 +757,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="74" y="782.5"/>
+            <point key="canvasLocation" x="75" y="822.5"/>
         </scene>
     </scenes>
 </document>

@@ -35,6 +35,7 @@ class DataSource: NSObject, NSCollectionViewDataSource {
     dynamic var gameOver = false
 
     var cellsToRefresh = Set<NSIndexPath>()
+    var incorrectCells = Set<Int>()
 
     @IBOutlet weak var timerLabel: TimerLabel!
 
@@ -58,7 +59,6 @@ class DataSource: NSObject, NSCollectionViewDataSource {
         placeMines(40)
         minesLeftCounter = 40
         timerLabel.reset()
-        timerLabel.start()
         firstMove = true
     }
 
@@ -88,24 +88,63 @@ class DataSource: NSObject, NSCollectionViewDataSource {
         return dataArray.count
     }
 
+    func resolveIncorrect() {
+        cellsToRefresh = Set<NSIndexPath>()
+        for cell in incorrectCells {
+            print("resolving ", cell)
+            dataArray[cell] = CellType.MINE_FLAG
+            cellsToRefresh.insert(NSIndexPath(forItem: cell, inSection: 0))
+        }
+        fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
+    }
+
+    func markMine(cellAtIndex: Int) {
+        let currentCell = dataArray[cellAtIndex]
+        if currentCell == CellType.EMPTY {
+            dataArray[cellAtIndex] = CellType.EMPTY_FLAG
+            minesLeftCounter -= 1
+            incorrectCells.insert(cellAtIndex)
+        } else if currentCell == CellType.EMPTY_FLAG {
+            dataArray[cellAtIndex] = CellType.EMPTY_QUESTION
+            minesLeftCounter += 1
+        } else if currentCell == CellType.EMPTY_QUESTION {
+            dataArray[cellAtIndex] = CellType.EMPTY
+            incorrectCells.remove(cellAtIndex)
+        } else if currentCell == CellType.MINE {
+            dataArray[cellAtIndex] = CellType.MINE_FLAG
+            minesLeftCounter -= 1
+        } else if currentCell == CellType.MINE_FLAG {
+            dataArray[cellAtIndex] = CellType.MINE_QUESTION
+            minesLeftCounter += 1
+            incorrectCells.insert(cellAtIndex)
+        } else if currentCell == CellType.MINE_QUESTION {
+            dataArray[cellAtIndex] = CellType.MINE
+            incorrectCells.remove(cellAtIndex)
+        }
+        fieldCollectionView.reloadItemsAtIndexPaths(Set<NSIndexPath>(arrayLiteral: NSIndexPath(forItem: cellAtIndex, inSection: 0)))
+    }
+
     func uncover(cellWithIndex: Int) -> Bool {
         cellsToRefresh = Set<NSIndexPath>()
 
         let currentCell = dataArray[cellWithIndex]
-        if (currentCell == CellType.MINE) {
-            if firstMove {
+        if firstMove {
+            if currentCell == CellType.MINE {
                 dataArray[cellWithIndex] = CellType.EMPTY   // a mine should not be uncovered on first click
                 placeMineAtRandom()                         // it should be moved to a random free position
-            } else {
-                timerLabel.stop()
-                print("GAME OVER")  // TODO: Put game over here
-                return true
             }
+            timerLabel.start()
+            firstMove = false
+            cascade(cellWithIndex)
+        } else if (currentCell == CellType.MINE) {
+            timerLabel.stop()
+            resolveIncorrect()
+            print("GAME OVER")  // TODO: Put game over here
+            return true
         } else if (currentCell == CellType.EMPTY) {
             cascade(cellWithIndex)
         }
         fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
-        firstMove = false
         return false
     }
 
@@ -113,44 +152,44 @@ class DataSource: NSObject, NSCollectionViewDataSource {
         var mineCount = 0
         if canGoNorth(atIndex) {
             if dataArray[atIndex-width] == CellType.MINE
-                || dataArray[atIndex-width] == CellType.RIGHT_FLAG {
+                || dataArray[atIndex-width] == CellType.MINE_FLAG {
                 mineCount += 1
             }
             if canGoEast(atIndex)
                 && (dataArray[atIndex-(width-1)] == CellType.MINE
-                    || dataArray[atIndex-(width-1)] == CellType.RIGHT_FLAG) {
+                    || dataArray[atIndex-(width-1)] == CellType.MINE_FLAG) {
                 mineCount += 1
             }
             if canGoWest(atIndex)
                 && (dataArray[atIndex-(width+1)] == CellType.MINE
-                    || dataArray[atIndex-(width+1)] == CellType.RIGHT_FLAG) {
+                    || dataArray[atIndex-(width+1)] == CellType.MINE_FLAG) {
                 mineCount += 1
             }
         }
         if canGoSouth(atIndex) {
             if dataArray[atIndex+width] == CellType.MINE
-                || dataArray[atIndex+width] == CellType.RIGHT_FLAG {
+                || dataArray[atIndex+width] == CellType.MINE_FLAG {
                 mineCount += 1
             }
             if canGoEast(atIndex)
                 && (dataArray[atIndex+(width+1)] == CellType.MINE
-                    || dataArray[atIndex+(width+1)] == CellType.RIGHT_FLAG) {
+                    || dataArray[atIndex+(width+1)] == CellType.MINE_FLAG) {
                 mineCount += 1
             }
             if canGoWest(atIndex)
                 && (dataArray[atIndex+(width-1)] == CellType.MINE
-                    || dataArray[atIndex+(width-1)] == CellType.RIGHT_FLAG) {
+                    || dataArray[atIndex+(width-1)] == CellType.MINE_FLAG) {
                 mineCount += 1
             }
         }
         if canGoEast(atIndex)
             && (dataArray[atIndex+1] == CellType.MINE
-                || dataArray[atIndex+1] == CellType.RIGHT_FLAG) {
+                || dataArray[atIndex+1] == CellType.MINE_FLAG) {
             mineCount += 1
         }
         if canGoWest(atIndex)
             && (dataArray[atIndex-1] == CellType.MINE
-                || dataArray[atIndex-1] == CellType.RIGHT_FLAG) {
+                || dataArray[atIndex-1] == CellType.MINE_FLAG) {
             mineCount += 1
         }
         return mineCount
@@ -212,25 +251,6 @@ class DataSource: NSObject, NSCollectionViewDataSource {
     func canGoSouth(fromIndex: Int) -> Bool {
         return fromIndex < (width*(height-1))
     }
-
-    func mineSet(atIndex: Int) {
-
-        let currentCell = dataArray[atIndex]
-        if currentCell == CellType.EMPTY {
-            dataArray[atIndex] = CellType.WRONG_FLAG
-            minesLeftCounter -= 1
-        } else if currentCell == CellType.MINE {
-            dataArray[atIndex] = CellType.RIGHT_FLAG
-            minesLeftCounter += 1
-        } else if currentCell == CellType.RIGHT_FLAG {
-            dataArray[atIndex] = CellType.MINE
-            minesLeftCounter -= 1
-        } else if currentCell == CellType.WRONG_FLAG {
-            dataArray[atIndex] = CellType.EMPTY
-            minesLeftCounter += 1
-        }
-        fieldCollectionView.reloadItemsAtIndexPaths(Set<NSIndexPath>(arrayLiteral: NSIndexPath(forItem: atIndex, inSection: 0)))
-    }
 }
 
 class CollectionViewItem: NSCollectionViewItem {
@@ -252,12 +272,16 @@ class CollectionViewItem: NSCollectionViewItem {
                 } else if cellType == CellType.VISITED {
                     textField?.stringValue = ""
                     view.layer?.backgroundColor = CellColor.CELL_LIGHT.CGColor
-                } else if cellType == CellType.RIGHT_FLAG || cellType == CellType.WRONG_FLAG {
+                } else if cellType == CellType.MINE_FLAG || cellType == CellType.EMPTY_FLAG {
                     textField?.stringValue = ""
-                    view.layer?.backgroundColor = CellColor.MINE_LIGHT.CGColor
+                    view.layer?.backgroundColor = CellColor.MINE_MEDUIM.CGColor
                 } else if cellType == CellType.MINE {
                     textField?.stringValue = ""
                     view.layer?.backgroundColor = CellColor.CELL_EMPTY.CGColor
+                } else if (cellType == CellType.EMPTY_QUESTION
+                    || cellType == CellType.MINE_QUESTION) {
+                    textField?.stringValue = "?"
+                    view.layer?.backgroundColor = CellColor.CELL_GREEN.CGColor
                 }
 
             }
@@ -272,17 +296,20 @@ class CollectionViewItem: NSCollectionViewItem {
     }
 
     override func rightMouseUp(theEvent: NSEvent) {
-        dataSource.mineSet(index)
+        dataSource.markMine(index)
     }
 }
 
 class TimerLabel: NSTextField {
-    var counter = 0
+    var counter: Int = 0 {
+        didSet {
+            stringValue = "Time: " + String(counter)
+        }
+    }
     var timer: NSTimer!
 
     func start() {
-        Swift.print("timer started")    // TODO
-        timer = NSTimer(timeInterval: 1, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(self.tick), userInfo: nil, repeats: true)
     }
 
     func stop() {
@@ -290,9 +317,7 @@ class TimerLabel: NSTextField {
     }
 
     func tick() {
-        Swift.print("counter")
         counter += 1
-        stringValue = "Time: " + String(counter)
     }
 
     func reset() {
@@ -301,17 +326,21 @@ class TimerLabel: NSTextField {
 }
 
 class CellColor {
-    static let MINE_LIGHT = NSColor(red: 1.0, green: 0.28, blue: 0.27, alpha: 1.0)  // 0xFF4746
+    static let MINE_LIGHT = NSColor(red: 1.0, green: 0.38, blue: 0.37, alpha: 1.0)
+    static let MINE_MEDUIM = NSColor(red: 1.0, green: 0.28, blue: 0.27, alpha: 1.0)  // 0xFF4746
     static let MINE_DARK = NSColor(red: 0.70, green: 0.13, blue: 0.12, alpha: 1.0)  // 0xB2201F
     static let CELL_EMPTY = NSColor(red: 1.0, green: 0.99, blue: 0.38, alpha: 1.0)  // 0xFFFD60
     static let CELL_LIGHT = NSColor(red: 0.14, green: 0.54, blue: 0.80, alpha: 1.0) // 0x248ACC
     static let CELL_DARK = NSColor(red: 0.16, green: 0.49, blue: 0.70, alpha: 1.0)  // 0x287DB2
+    static let CELL_GREEN = NSColor(red: 0.5, green: 0.99, blue: 0.38, alpha: 1.0)
 }
 
 class CellType {
     static let EMPTY: Int = 0
     static let MINE: Int = -1
     static let VISITED: Int = -2
-    static let RIGHT_FLAG: Int = -3
-    static let WRONG_FLAG: Int = -4
+    static let MINE_FLAG: Int = -3
+    static let EMPTY_FLAG: Int = -4
+    static let MINE_QUESTION: Int = -5
+    static let EMPTY_QUESTION: Int = -6
 }
