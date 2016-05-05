@@ -11,11 +11,22 @@ import Cocoa
 class ViewController: NSViewController {
 
     @IBOutlet weak var scrollView: NSScrollView!
+    @IBOutlet var dataSource: DataSource!
+    @IBOutlet weak var collectionView: NSCollectionView!
+
+    @IBAction func newBeginnerGame(sender: NSMenuItem) {
+        dataSource.initGame(9, fieldHeight: 9, numberOfMines: 9)
+    }
+
+    @IBAction func newAdvancedGame(sender: NSMenuItem) {
+        dataSource.initGame(16, fieldHeight: 16, numberOfMines: 40)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.setBoundsSize(NSSize(width: 418, height: 420))
+        //scrollView.setBoundsSize(NSSize(width: 418, height: 420))
         // Do any additional setup after loading the view.
+        print("view loaded")
     }
 
     override var representedObject: AnyObject? {
@@ -28,8 +39,10 @@ class ViewController: NSViewController {
 }
 
 class DataSource: NSObject, NSCollectionViewDataSource {
-    var height = 0, width = 0
-    var dataArray = [Int]()
+    var height: Int = 9
+    var width: Int = 9
+    var mines = 10
+    var dataArray = [Int](count: 81, repeatedValue: 0)
     var firstMove = false
     dynamic var minesLeftCounter = 0
     dynamic var gameOver = false
@@ -42,24 +55,36 @@ class DataSource: NSObject, NSCollectionViewDataSource {
     @IBOutlet weak var fieldCollectionView: NSCollectionView! {
         didSet {
             fieldCollectionView.registerNib(NSNib(nibNamed: "CellItem", bundle: nil), forItemWithIdentifier: "cellItem")
+            fieldCollectionView.collectionViewLayout = FieldGridLayout(numOfRows: height, numOfColumns: width, itemDimension: NSSize(width: 25, height: 25), gapBetweenItems: 1)
+            print("layout set")
         }
     }
 
+    @IBAction func makeAdvancedField(sender: NSButton) {
+        initGame(16, fieldHeight: 16, numberOfMines: 40)
+    }
+
     @IBAction func startButtonPressed(sender: NSButton) {
-        startGame()
+        resetGame()
         print("game started")
         gameOver = false
         fieldCollectionView.reloadData()
     }
 
-    func startGame() {
-        width = 16
-        height = 16
+    func resetGame() {
         dataArray = [Int](count: width*height, repeatedValue: 0)
-        placeMines(40)
-        minesLeftCounter = 40
+        placeMines(mines)
+        minesLeftCounter = mines
         timerLabel.reset()
         firstMove = true
+    }
+
+    func initGame(fieldWidth: Int, fieldHeight: Int, numberOfMines: Int) {
+        width = fieldWidth
+        height = fieldHeight
+        mines = numberOfMines
+        dataArray = [Int](count: width*height, repeatedValue: 0)
+        fieldCollectionView.collectionViewLayout = FieldGridLayout(numOfRows: height, numOfColumns: width, itemDimension: NSSize(width: 25, height: 25), gapBetweenItems: 1)
     }
 
     func placeMines(numberOfMInes: Int) {
@@ -80,18 +105,20 @@ class DataSource: NSObject, NSCollectionViewDataSource {
         let item = collectionView.makeItemWithIdentifier("cellItem", forIndexPath: indexPath) as! CollectionViewItem
         item.dataSource = self
         item.index = indexPath.indexAtPosition(1)
-        item.representedObject = dataArray[indexPath.indexAtPosition(1)]
+        if dataArray.count > 0 {
+            item.representedObject = dataArray[indexPath.indexAtPosition(1)]
+        }
         return item
     }
 
     func collectionView(collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("items in section", dataArray.count)
         return dataArray.count
     }
 
     func resolveIncorrect() {
         cellsToRefresh = Set<NSIndexPath>()
         for cell in incorrectCells {
-            print("resolving ", cell)
             dataArray[cell] = CellType.MINE_FLAG
             cellsToRefresh.insert(NSIndexPath(forItem: cell, inSection: 0))
         }
@@ -196,8 +223,7 @@ class DataSource: NSObject, NSCollectionViewDataSource {
     }
 
     func cascade(fromIndex: Int) {
-        if dataArray[fromIndex] == CellType.VISITED
-            || dataArray[fromIndex] > 0 {
+        if dataArray[fromIndex] == CellType.VISITED || dataArray[fromIndex] > 0 {
             return
         }
 
@@ -260,6 +286,7 @@ class CollectionViewItem: NSCollectionViewItem {
 
     override var representedObject: AnyObject? {
         didSet {
+            print("object set to ", representedObject)
             if representedObject != nil {
                 view.wantsLayer = true
                 let cellType = representedObject as! Int
@@ -278,12 +305,10 @@ class CollectionViewItem: NSCollectionViewItem {
                 } else if cellType == CellType.MINE {
                     textField?.stringValue = ""
                     view.layer?.backgroundColor = CellColor.CELL_EMPTY.CGColor
-                } else if (cellType == CellType.EMPTY_QUESTION
-                    || cellType == CellType.MINE_QUESTION) {
+                } else if (cellType == CellType.EMPTY_QUESTION || cellType == CellType.MINE_QUESTION) {
                     textField?.stringValue = "?"
                     view.layer?.backgroundColor = CellColor.CELL_GREEN.CGColor
                 }
-
             }
         }
     }
@@ -298,6 +323,67 @@ class CollectionViewItem: NSCollectionViewItem {
     override func rightMouseUp(theEvent: NSEvent) {
         dataSource.markMine(index)
     }
+}
+
+class FieldGridLayout: NSCollectionViewGridLayout {
+
+    let itemWidth: Int
+    let itemHeight: Int
+    let gap: Int
+    var viewWidth: Int!
+    var viewHeight: Int!
+    var layoutAttributes = [NSCollectionViewLayoutAttributes]()
+    var contentSize: NSSize!
+
+    init(numOfRows: Int, numOfColumns: Int, itemDimension: NSSize, gapBetweenItems: Int) {
+        itemWidth = Int(itemDimension.width)
+        itemHeight = Int(itemDimension.height)
+        gap = gapBetweenItems
+        super.init()
+        maximumNumberOfRows = numOfRows
+        maximumNumberOfColumns = numOfColumns
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func prepareLayout() {
+        viewWidth = maximumNumberOfColumns * itemWidth + (maximumNumberOfColumns - 1) * gap
+        viewHeight = maximumNumberOfRows * itemHeight + (maximumNumberOfRows - 1) * gap
+        contentSize = NSSize(width: viewWidth, height: viewHeight)
+
+        let horizontalItemOffset = itemWidth + gap
+        let verticalItemOffset = itemHeight + gap
+        let numberOfItems = maximumNumberOfColumns * maximumNumberOfRows
+        for i in 0 ... numberOfItems-1 {
+            let attribute = NSCollectionViewLayoutAttributes(forItemWithIndexPath: NSIndexPath(forItem: i, inSection: 0))
+            let row = i % maximumNumberOfColumns
+            let column = i / maximumNumberOfColumns
+            attribute.frame = NSRect(x: horizontalItemOffset * column, y: verticalItemOffset*row, width: itemWidth, height: itemHeight)
+            layoutAttributes.append(attribute)
+        }
+    }
+
+    override var collectionViewContentSize: NSSize {
+        return contentSize
+    }
+
+    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes? {
+        print("asked for item at ", indexPath)
+        for attr in layoutAttributes {
+            if attr.indexPath == indexPath {
+                return attr
+            }
+        }
+        print("returning nil")
+        return nil
+    }
+
+    override func layoutAttributesForElementsInRect(rect: NSRect) -> [NSCollectionViewLayoutAttributes] {
+        return layoutAttributes
+    }
+
 }
 
 class TimerLabel: NSTextField {
