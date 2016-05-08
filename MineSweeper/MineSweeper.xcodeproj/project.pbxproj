@@ -7,21 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7344D2911CDF70E70038E529 /* TimerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7344D2901CDF70E70038E529 /* TimerTextField.swift */; };
+		73739E681CDD12F1007D4156 /* FieldDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73739E671CDD12F1007D4156 /* FieldDataSource.swift */; };
+		73739E6A1CDD135B007D4156 /* FieldGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73739E691CDD135B007D4156 /* FieldGridLayout.swift */; };
+		73739E6C1CDD1646007D4156 /* FieldCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73739E6B1CDD1646007D4156 /* FieldCollectionView.swift */; };
+		73739E6E1CDD1FBC007D4156 /* FieldSettingsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73739E6D1CDD1FBC007D4156 /* FieldSettingsProvider.swift */; };
+		73739E701CDF3D26007D4156 /* CellCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73739E6F1CDF3D26007D4156 /* CellCollectionViewItem.swift */; };
+		73739E721CDF3D60007D4156 /* CellProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73739E711CDF3D60007D4156 /* CellProperties.swift */; };
 		73D89F251CD0D73800EF75A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D89F241CD0D73800EF75A4 /* AppDelegate.swift */; };
-		73D89F271CD0D73800EF75A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D89F261CD0D73800EF75A4 /* ViewController.swift */; };
 		73D89F291CD0D73800EF75A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73D89F281CD0D73800EF75A4 /* Assets.xcassets */; };
 		73D89F2C1CD0D73800EF75A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73D89F2A1CD0D73800EF75A4 /* Main.storyboard */; };
-		73D89F341CD0D9D800EF75A4 /* CellItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D89F331CD0D9D800EF75A4 /* CellItem.xib */; };
+		73D89F341CD0D9D800EF75A4 /* CellCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73D89F331CD0D9D800EF75A4 /* CellCollectionViewItem.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7344D2901CDF70E70038E529 /* TimerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerTextField.swift; sourceTree = "<group>"; };
+		73739E671CDD12F1007D4156 /* FieldDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldDataSource.swift; sourceTree = "<group>"; };
+		73739E691CDD135B007D4156 /* FieldGridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldGridLayout.swift; sourceTree = "<group>"; };
+		73739E6B1CDD1646007D4156 /* FieldCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCollectionView.swift; sourceTree = "<group>"; };
+		73739E6D1CDD1FBC007D4156 /* FieldSettingsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldSettingsProvider.swift; sourceTree = "<group>"; };
+		73739E6F1CDF3D26007D4156 /* CellCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellCollectionViewItem.swift; sourceTree = "<group>"; };
+		73739E711CDF3D60007D4156 /* CellProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellProperties.swift; sourceTree = "<group>"; };
 		73D89F211CD0D73800EF75A4 /* MineSweeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MineSweeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73D89F241CD0D73800EF75A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		73D89F261CD0D73800EF75A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		73D89F281CD0D73800EF75A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73D89F2B1CD0D73800EF75A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		73D89F2D1CD0D73800EF75A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		73D89F331CD0D9D800EF75A4 /* CellItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellItem.xib; sourceTree = "<group>"; };
+		73D89F331CD0D9D800EF75A4 /* CellCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellCollectionViewItem.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +66,18 @@
 		73D89F231CD0D73800EF75A4 /* MineSweeper */ = {
 			isa = PBXGroup;
 			children = (
-				73D89F241CD0D73800EF75A4 /* AppDelegate.swift */,
-				73D89F261CD0D73800EF75A4 /* ViewController.swift */,
-				73D89F281CD0D73800EF75A4 /* Assets.xcassets */,
-				73D89F2A1CD0D73800EF75A4 /* Main.storyboard */,
 				73D89F2D1CD0D73800EF75A4 /* Info.plist */,
-				73D89F331CD0D9D800EF75A4 /* CellItem.xib */,
+				73D89F241CD0D73800EF75A4 /* AppDelegate.swift */,
+				73739E6F1CDF3D26007D4156 /* CellCollectionViewItem.swift */,
+				73739E711CDF3D60007D4156 /* CellProperties.swift */,
+				73739E6B1CDD1646007D4156 /* FieldCollectionView.swift */,
+				73739E671CDD12F1007D4156 /* FieldDataSource.swift */,
+				73739E691CDD135B007D4156 /* FieldGridLayout.swift */,
+				73739E6D1CDD1FBC007D4156 /* FieldSettingsProvider.swift */,
+				7344D2901CDF70E70038E529 /* TimerTextField.swift */,
+				73D89F281CD0D73800EF75A4 /* Assets.xcassets */,
+				73D89F331CD0D9D800EF75A4 /* CellCollectionViewItem.xib */,
+				73D89F2A1CD0D73800EF75A4 /* Main.storyboard */,
 			);
 			path = MineSweeper;
 			sourceTree = "<group>";
@@ -123,7 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73D89F291CD0D73800EF75A4 /* Assets.xcassets in Resources */,
-				73D89F341CD0D9D800EF75A4 /* CellItem.xib in Resources */,
+				73D89F341CD0D9D800EF75A4 /* CellCollectionViewItem.xib in Resources */,
 				73D89F2C1CD0D73800EF75A4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,8 +153,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73D89F271CD0D73800EF75A4 /* ViewController.swift in Sources */,
+				73739E6E1CDD1FBC007D4156 /* FieldSettingsProvider.swift in Sources */,
+				73739E6A1CDD135B007D4156 /* FieldGridLayout.swift in Sources */,
+				7344D2911CDF70E70038E529 /* TimerTextField.swift in Sources */,
+				73739E681CDD12F1007D4156 /* FieldDataSource.swift in Sources */,
+				73739E721CDF3D60007D4156 /* CellProperties.swift in Sources */,
 				73D89F251CD0D73800EF75A4 /* AppDelegate.swift in Sources */,
+				73739E701CDF3D26007D4156 /* CellCollectionViewItem.swift in Sources */,
+				73739E6C1CDD1646007D4156 /* FieldCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +303,7 @@
 				73D89F321CD0D73800EF75A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

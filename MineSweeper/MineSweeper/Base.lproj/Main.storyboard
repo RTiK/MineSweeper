@@ -63,22 +63,24 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="New Game..." id="Bx9-Yv-w14">
                                                 <items>
-                                                    <menuItem title="Beginner" id="wQr-r4-pGw">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <menuItem title="Beginner" keyEquivalent="1" id="wQr-r4-pGw">
                                                         <connections>
-                                                            <action selector="newBeginnerGame:" target="Wpl-dA-XZB" id="U36-7m-coJ"/>
+                                                            <action selector="prepareBeginnerGame:" target="Ady-hI-5gd" id="Egk-of-L1w"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Advanced" id="4G0-oD-RJE">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <menuItem title="Advanced" keyEquivalent="2" id="4G0-oD-RJE">
                                                         <connections>
-                                                            <action selector="newAdvancedGame:" target="Wpl-dA-XZB" id="x3b-kt-gE2"/>
+                                                            <action selector="prepareAdvancedGame:" target="Ady-hI-5gd" id="M35-xH-oLU"/>
                                                         </connections>
                                                     </menuItem>
                                                 </items>
                                             </menu>
                                         </menuItem>
-                                        <menuItem title="Reset Game" keyEquivalent="r" id="cQz-4X-8sd"/>
+                                        <menuItem title="Reset Game" keyEquivalent="r" id="cQz-4X-8sd">
+                                            <connections>
+                                                <action selector="resetGame:" target="Ady-hI-5gd" id="8Ru-bE-3FR"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
@@ -132,7 +134,6 @@
                     </connections>
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="MineSweeper" customModuleProvider="target"/>
-                <customObject id="Wpl-dA-XZB" customClass="ViewController" customModule="MineSweeper" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
@@ -158,23 +159,23 @@
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="MineSweeper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" sceneMemberID="viewController">
                     <visualEffectView key="view" appearanceType="vibrantDark" blendingMode="behindWindow" state="followsWindowActiveState" id="Dio-us-J1L">
                         <rect key="frame" x="0.0" y="0.0" width="416" height="477"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKe-2i-TKc">
-                                <rect key="frame" x="0.0" y="0.0" width="416" height="428"/>
+                            <scrollView horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" borderType="line" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKe-2i-TKc">
+                                <rect key="frame" x="0.0" y="0.0" width="416" height="416"/>
                                 <clipView key="contentView" ambiguous="YES" id="hPo-A3-Ins">
-                                    <rect key="frame" x="1" y="1" width="414" height="426"/>
+                                    <rect key="frame" x="1" y="1" width="414" height="414"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <collectionView ambiguous="YES" id="WiJ-Sb-zbh">
+                                        <collectionView ambiguous="YES" id="WiJ-Sb-zbh" customClass="FieldCollectionView" customModule="MineSweeper" customModuleProvider="target">
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <collectionViewGridLayout key="collectionViewLayout" id="H4R-q4-7jU"/>
+                                            <collectionViewLayout key="collectionViewLayout" id="bOo-lN-sY9" customClass="FieldGridLayout" customModule="MineSweeper" customModuleProvider="target"/>
                                             <color key="primaryBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <outlet property="dataSource" destination="pz9-qR-zEM" id="Rvm-Up-iXz"/>
+                                                <outlet property="dataSource" destination="OI3-ya-8Pj" id="LML-7a-6V4"/>
                                             </connections>
                                         </collectionView>
                                     </subviews>
@@ -196,14 +197,14 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="pz9-qR-zEM" name="displayPatternValue1" keyPath="self.minesLeftCounter" id="6jl-SE-ceC">
+                                    <binding destination="OI3-ya-8Pj" name="displayPatternValue1" keyPath="self.minesLeftCounter" id="R9E-wc-h41">
                                         <dictionary key="options">
                                             <string key="NSDisplayPattern">Mines Left: %{value1}@</string>
                                         </dictionary>
                                     </binding>
                                 </connections>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerLabel" customModule="MineSweeper" customModuleProvider="target">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerTextField" customModule="MineSweeper" customModuleProvider="target">
                                 <rect key="frame" x="294" y="436" width="104" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Time" id="l7h-6s-GxS">
                                     <font key="font" metaFont="system"/>
@@ -212,23 +213,13 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pVe-Eg-LOl">
-                                <rect key="frame" x="168" y="429" width="81" height="32"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v8u-lu-Amt">
+                                <rect key="frame" x="171" y="429" width="75" height="32"/>
+                                <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v8u-lu-Amt">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="startButtonPressed:" target="pz9-qR-zEM" id="JrN-rq-8pN"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tvU-lm-0JZ">
-                                <rect key="frame" x="249" y="429" width="81" height="32"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0Xw-Hq-fUH">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="makeAdvancedField:" target="pz9-qR-zEM" id="NGK-v4-ei9"/>
+                                    <action selector="resetGame:" target="rPt-NT-nkU" id="5ra-jy-N55"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -237,17 +228,12 @@
                             <constraint firstItem="pVe-Eg-LOl" firstAttribute="centerX" secondItem="Dio-us-J1L" secondAttribute="centerX" id="qnL-Y4-sop"/>
                         </constraints>
                     </visualEffectView>
-                    <connections>
-                        <outlet property="collectionView" destination="WiJ-Sb-zbh" id="a9c-5g-F3M"/>
-                        <outlet property="dataSource" destination="pz9-qR-zEM" id="NcS-Xl-uFd"/>
-                        <outlet property="scrollView" destination="LKe-2i-TKc" id="rB7-by-sKO"/>
-                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <customObject id="pz9-qR-zEM" customClass="DataSource" customModule="MineSweeper" customModuleProvider="target">
+                <customObject id="OI3-ya-8Pj" customClass="FieldDataSource" customModule="MineSweeper" customModuleProvider="target">
                     <connections>
-                        <outlet property="fieldCollectionView" destination="WiJ-Sb-zbh" id="UoO-3Z-KqM"/>
-                        <outlet property="timerLabel" destination="WFA-bY-VTB" id="xtz-KT-ExN"/>
+                        <outlet property="fieldCollectionView" destination="WiJ-Sb-zbh" id="Bfu-ls-b9s"/>
+                        <outlet property="timerLabel" destination="WFA-bY-VTB" id="Sr1-2R-f94"/>
                     </connections>
                 </customObject>
             </objects>
