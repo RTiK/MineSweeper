@@ -141,9 +141,9 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                <windowController id="B8D-0N-5wS" customClass="WindowController" customModule="MineSweeper" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -160,17 +160,17 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" sceneMemberID="viewController">
-                    <visualEffectView key="view" appearanceType="vibrantDark" blendingMode="behindWindow" state="followsWindowActiveState" id="Dio-us-J1L">
+                    <visualEffectView key="view" wantsLayer="YES" appearanceType="vibrantDark" blendingMode="behindWindow" state="followsWindowActiveState" id="Dio-us-J1L">
                         <rect key="frame" x="0.0" y="0.0" width="416" height="477"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <scrollView horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" borderType="line" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKe-2i-TKc">
+                            <scrollView horizontalHuggingPriority="750" verticalHuggingPriority="750" borderType="line" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" findBarPosition="belowContent" translatesAutoresizingMaskIntoConstraints="NO" id="LKe-2i-TKc">
                                 <rect key="frame" x="0.0" y="0.0" width="416" height="416"/>
-                                <clipView key="contentView" ambiguous="YES" id="hPo-A3-Ins">
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hPo-A3-Ins">
                                     <rect key="frame" x="1" y="1" width="414" height="414"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <collectionView ambiguous="YES" id="WiJ-Sb-zbh" customClass="FieldCollectionView" customModule="MineSweeper" customModuleProvider="target">
+                                        <collectionView id="WiJ-Sb-zbh" customClass="FieldCollectionView" customModule="MineSweeper" customModuleProvider="target">
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <collectionViewLayout key="collectionViewLayout" id="bOo-lN-sY9" customClass="FieldGridLayout" customModule="MineSweeper" customModuleProvider="target"/>
                                             <color key="primaryBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -179,6 +179,7 @@
                                             </connections>
                                         </collectionView>
                                     </subviews>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1rU-jc-UCc">
                                     <rect key="frame" x="1" y="144" width="233" height="15"/>
@@ -189,24 +190,24 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wRb-bm-1nx">
-                                <rect key="frame" x="18" y="436" width="114" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mines Left " id="I20-Rx-xoE">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wRb-bm-1nx">
+                                <rect key="frame" x="18" y="436" width="64" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mines" id="I20-Rx-xoE">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="OI3-ya-8Pj" name="displayPatternValue1" keyPath="self.minesLeftCounter" id="R9E-wc-h41">
+                                    <binding destination="OI3-ya-8Pj" name="displayPatternValue1" keyPath="self.minesLeftCounter" id="9q8-fP-V86">
                                         <dictionary key="options">
-                                            <string key="NSDisplayPattern">Mines Left: %{value1}@</string>
+                                            <string key="NSDisplayPattern">Mines: %{value1}@</string>
                                         </dictionary>
                                     </binding>
                                 </connections>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerTextField" customModule="MineSweeper" customModuleProvider="target">
-                                <rect key="frame" x="294" y="436" width="104" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Time" id="l7h-6s-GxS">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerTextField" customModule="MineSweeper" customModuleProvider="target">
+                                <rect key="frame" x="334" y="436" width="64" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Time: 0" id="l7h-6s-GxS">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -224,8 +225,16 @@
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="LKe-2i-TKc" secondAttribute="bottom" id="4fb-0j-p7u"/>
+                            <constraint firstItem="LKe-2i-TKc" firstAttribute="leading" secondItem="Dio-us-J1L" secondAttribute="leading" id="6bO-RL-oHl"/>
                             <constraint firstItem="pVe-Eg-LOl" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="20" id="9Ht-Ny-PgS"/>
+                            <constraint firstItem="wRb-bm-1nx" firstAttribute="leading" secondItem="Dio-us-J1L" secondAttribute="leading" constant="20" id="KCQ-FO-AfA"/>
+                            <constraint firstItem="wRb-bm-1nx" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="24" id="QBd-2h-ZaV"/>
+                            <constraint firstAttribute="trailing" secondItem="LKe-2i-TKc" secondAttribute="trailing" id="T3U-99-G8Y"/>
+                            <constraint firstItem="LKe-2i-TKc" firstAttribute="top" secondItem="pVe-Eg-LOl" secondAttribute="bottom" constant="20" id="n5F-5q-ID9"/>
+                            <constraint firstAttribute="trailing" secondItem="WFA-bY-VTB" secondAttribute="trailing" constant="20" id="osf-Sa-LtF"/>
                             <constraint firstItem="pVe-Eg-LOl" firstAttribute="centerX" secondItem="Dio-us-J1L" secondAttribute="centerX" id="qnL-Y4-sop"/>
+                            <constraint firstItem="WFA-bY-VTB" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="24" id="u8B-al-Smh"/>
                         </constraints>
                     </visualEffectView>
                 </viewController>

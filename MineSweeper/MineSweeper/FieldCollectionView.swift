@@ -22,25 +22,27 @@ class FieldCollectionView: NSCollectionView {
     }
 
     func prepareBeginnerGame(sender: NSMenuItem) {
-        Swift.print("beginner")
         fieldDimensions = NSSize(width: 9, height: 9)
         numberOfMines = 10
-        (self.dataSource as! FieldDataSource).resetGame()
-        reloadData()
+        resetGame(sender)
     }
 
     func prepareAdvancedGame(sender: NSMenuItem) {
-        Swift.print("advanced")
         fieldDimensions = NSSize(width: 16, height: 16)
         numberOfMines = 40
-        Swift.print(self.dataSource)
-        (self.dataSource as! FieldDataSource).resetGame()
-        reloadData()
+        resetGame(sender)
     }
 
     func resetGame(sender: NSMenuItem) {
         (self.dataSource as! FieldDataSource).resetGame()
         reloadData()
+        Swift.print(collectionViewLayout?.collectionViewContentSize)
+        //superview?.setBoundsSize((collectionViewLayout?.collectionViewContentSize)!)
+        Swift.print(superview?.bounds)
+        //let windowWidth = (collectionViewLayout?.collectionViewContentSize.width)! + 2
+        //let windowHeight = (collectionViewLayout?.collectionViewContentSize.height)! + 62
+        //setBoundsSize((collectionViewLayout?.collectionViewContentSize)!)
+        //window?.setContentSize(NSSize(width: windowWidth, height: windowHeight))
     }
 
 }
