@@ -68,9 +68,14 @@
                                                             <action selector="prepareBeginnerGame:" target="Ady-hI-5gd" id="Egk-of-L1w"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Advanced" keyEquivalent="2" id="4G0-oD-RJE">
+                                                    <menuItem title="Intermediate" keyEquivalent="2" id="4G0-oD-RJE">
                                                         <connections>
                                                             <action selector="prepareAdvancedGame:" target="Ady-hI-5gd" id="M35-xH-oLU"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Expert" keyEquivalent="3" id="OGa-nX-bir">
+                                                        <connections>
+                                                            <action selector="prepareExpertGame:" target="Ady-hI-5gd" id="XMC-6O-s8E"/>
                                                         </connections>
                                                     </menuItem>
                                                 </items>
@@ -161,16 +166,50 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" sceneMemberID="viewController">
                     <visualEffectView key="view" wantsLayer="YES" appearanceType="vibrantDark" blendingMode="behindWindow" state="followsWindowActiveState" id="Dio-us-J1L">
-                        <rect key="frame" x="0.0" y="0.0" width="416" height="477"/>
+                        <rect key="frame" x="0.0" y="0.0" width="523" height="617"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <scrollView horizontalHuggingPriority="750" verticalHuggingPriority="750" borderType="line" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" findBarPosition="belowContent" translatesAutoresizingMaskIntoConstraints="NO" id="LKe-2i-TKc">
-                                <rect key="frame" x="0.0" y="0.0" width="416" height="416"/>
-                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hPo-A3-Ins">
-                                    <rect key="frame" x="1" y="1" width="414" height="414"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wRb-bm-1nx">
+                                <rect key="frame" x="18" y="571" width="64" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mines" id="I20-Rx-xoE">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="OI3-ya-8Pj" name="displayPatternValue1" keyPath="self.minesLeftCounter" id="9q8-fP-V86">
+                                        <dictionary key="options">
+                                            <string key="NSDisplayPattern">Mines: %{value1}@</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerTextField" customModule="MineSweeper" customModuleProvider="target">
+                                <rect key="frame" x="367" y="571" width="64" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Time: 0" id="l7h-6s-GxS">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pVe-Eg-LOl">
+                                <rect key="frame" x="187" y="564" width="75" height="32"/>
+                                <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v8u-lu-Amt">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="resetGame:" target="rPt-NT-nkU" id="5ra-jy-N55"/>
+                                </connections>
+                            </button>
+                            <scrollView horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" borderType="line" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" findBarPosition="belowContent" translatesAutoresizingMaskIntoConstraints="NO" id="LKe-2i-TKc">
+                                <rect key="frame" x="0.0" y="0.0" width="523" height="551"/>
+                                <clipView key="contentView" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" drawsBackground="NO" copiesOnScroll="NO" id="hPo-A3-Ins">
+                                    <rect key="frame" x="1" y="1" width="521" height="549"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView id="WiJ-Sb-zbh" customClass="FieldCollectionView" customModule="MineSweeper" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="521" height="549"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <collectionViewLayout key="collectionViewLayout" id="bOo-lN-sY9" customClass="FieldGridLayout" customModule="MineSweeper" customModuleProvider="target"/>
                                             <color key="primaryBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -190,51 +229,18 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wRb-bm-1nx">
-                                <rect key="frame" x="18" y="436" width="64" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mines" id="I20-Rx-xoE">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="OI3-ya-8Pj" name="displayPatternValue1" keyPath="self.minesLeftCounter" id="9q8-fP-V86">
-                                        <dictionary key="options">
-                                            <string key="NSDisplayPattern">Mines: %{value1}@</string>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerTextField" customModule="MineSweeper" customModuleProvider="target">
-                                <rect key="frame" x="334" y="436" width="64" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Time: 0" id="l7h-6s-GxS">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pVe-Eg-LOl">
-                                <rect key="frame" x="171" y="429" width="75" height="32"/>
-                                <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v8u-lu-Amt">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="resetGame:" target="rPt-NT-nkU" id="5ra-jy-N55"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="LKe-2i-TKc" secondAttribute="bottom" id="4fb-0j-p7u"/>
-                            <constraint firstItem="LKe-2i-TKc" firstAttribute="leading" secondItem="Dio-us-J1L" secondAttribute="leading" id="6bO-RL-oHl"/>
-                            <constraint firstItem="pVe-Eg-LOl" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="20" id="9Ht-Ny-PgS"/>
-                            <constraint firstItem="wRb-bm-1nx" firstAttribute="leading" secondItem="Dio-us-J1L" secondAttribute="leading" constant="20" id="KCQ-FO-AfA"/>
-                            <constraint firstItem="wRb-bm-1nx" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="24" id="QBd-2h-ZaV"/>
-                            <constraint firstAttribute="trailing" secondItem="LKe-2i-TKc" secondAttribute="trailing" id="T3U-99-G8Y"/>
-                            <constraint firstItem="LKe-2i-TKc" firstAttribute="top" secondItem="pVe-Eg-LOl" secondAttribute="bottom" constant="20" id="n5F-5q-ID9"/>
-                            <constraint firstAttribute="trailing" secondItem="WFA-bY-VTB" secondAttribute="trailing" constant="20" id="osf-Sa-LtF"/>
-                            <constraint firstItem="pVe-Eg-LOl" firstAttribute="centerX" secondItem="Dio-us-J1L" secondAttribute="centerX" id="qnL-Y4-sop"/>
-                            <constraint firstItem="WFA-bY-VTB" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="24" id="u8B-al-Smh"/>
+                            <constraint firstAttribute="bottom" secondItem="LKe-2i-TKc" secondAttribute="bottom" id="23b-bx-0jc"/>
+                            <constraint firstItem="wRb-bm-1nx" firstAttribute="leading" secondItem="Dio-us-J1L" secondAttribute="leading" constant="20" id="8nq-E7-8GV"/>
+                            <constraint firstAttribute="trailing" secondItem="WFA-bY-VTB" secondAttribute="trailing" constant="20" id="8ye-zy-d3N"/>
+                            <constraint firstItem="pVe-Eg-LOl" firstAttribute="centerX" secondItem="Dio-us-J1L" secondAttribute="centerX" id="DjN-65-V8U"/>
+                            <constraint firstAttribute="trailing" secondItem="LKe-2i-TKc" secondAttribute="trailing" id="IOD-PX-qSS"/>
+                            <constraint firstItem="LKe-2i-TKc" firstAttribute="leading" secondItem="Dio-us-J1L" secondAttribute="leading" id="Sda-Sc-vdZ"/>
+                            <constraint firstItem="wRb-bm-1nx" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="29" id="Tdh-VW-2qe"/>
+                            <constraint firstItem="LKe-2i-TKc" firstAttribute="top" secondItem="pVe-Eg-LOl" secondAttribute="bottom" constant="20" id="Z8d-t8-BFV"/>
+                            <constraint firstItem="WFA-bY-VTB" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="29" id="mRV-UC-8Xj"/>
+                            <constraint firstItem="pVe-Eg-LOl" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="25" id="qVV-Nx-HXr"/>
                         </constraints>
                     </visualEffectView>
                 </viewController>
@@ -246,7 +252,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="75" y="822.5"/>
+            <point key="canvasLocation" x="75.5" y="903.5"/>
         </scene>
     </scenes>
 </document>

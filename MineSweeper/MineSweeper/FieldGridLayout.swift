@@ -31,15 +31,18 @@ class FieldGridLayout: NSCollectionViewGridLayout {
 
             for i in 0 ... numberOfItems-1 {
                 let attribute = NSCollectionViewLayoutAttributes(forItemWithIndexPath: NSIndexPath(forItem: i, inSection: 0))
-                let row = i % fieldWidth
-                let column = i / fieldWidth
-                attribute.frame = NSRect(x: horizontalItemOffset * column, y: verticalItemOffset*row, width: CellProperties.CELL_WIDTH, height: CellProperties.CELL_HEIGHT)
+                let column = i % fieldWidth
+                let row = i / fieldWidth
+                attribute.frame = NSRect(
+                    x: horizontalItemOffset * column, y: verticalItemOffset*row,
+                    width: CellProperties.CELL_WIDTH, height: CellProperties.CELL_HEIGHT)
                 layoutAttributes.append(attribute)
             }
         }
     }
 
     override var collectionViewContentSize: NSSize {
+        Swift.print(contentSize ?? NSSize(width: 100, height: 100))
         return contentSize ?? NSSize(width: 100, height: 100)
     }
 
@@ -49,11 +52,11 @@ class FieldGridLayout: NSCollectionViewGridLayout {
                 return attr
             }
         }
-        print("returning nil")
         return nil
     }
 
     override func layoutAttributesForElementsInRect(rect: NSRect) -> [NSCollectionViewLayoutAttributes] {
+        collectionView?.setFrameSize(collectionViewContentSize)
         return layoutAttributes
     }
     

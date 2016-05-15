@@ -91,7 +91,7 @@ class FieldDataSource: NSObject {
         if firstMove {
             if currentCell == CellProperties.TYPE_MINE {
                 dataArray[cellWithIndex] = CellProperties.TYPE_EMPTY   // a mine should not be uncovered on first click
-                placeMineAtRandom() // it should be moved to a random free position
+                placeMineAtRandom() // it should be moved to a random free position instead
             }
             timerLabel.start()
             firstMove = false

@@ -14,7 +14,7 @@ class FieldCollectionView: NSCollectionView {
     private var numberOfMines: Int!
 
     override func awakeFromNib() {
-        self.registerNib(NSNib(nibNamed: "CellCollectionViewItem", bundle: nil), forItemWithIdentifier: "cellItem")
+        registerNib(NSNib(nibNamed: "CellCollectionViewItem", bundle: nil), forItemWithIdentifier: "cellItem")
     }
 
     override var acceptsFirstResponder: Bool {
@@ -32,24 +32,26 @@ class FieldCollectionView: NSCollectionView {
         numberOfMines = 40
         resetGame(sender)
     }
+    func prepareExpertGame(sender: NSMenuItem) {
+        fieldDimensions = NSSize(width: 30, height: 16)
+        numberOfMines = 99
+        resetGame(sender)
+    }
 
     func resetGame(sender: NSMenuItem) {
         (self.dataSource as! FieldDataSource).resetGame()
         reloadData()
-        Swift.print(collectionViewLayout?.collectionViewContentSize)
-        //superview?.setBoundsSize((collectionViewLayout?.collectionViewContentSize)!)
-        Swift.print(superview?.bounds)
-        //let windowWidth = (collectionViewLayout?.collectionViewContentSize.width)! + 2
-        //let windowHeight = (collectionViewLayout?.collectionViewContentSize.height)! + 62
-        //setBoundsSize((collectionViewLayout?.collectionViewContentSize)!)
-        //window?.setContentSize(NSSize(width: windowWidth, height: windowHeight))
+        window?.setContentSize(NSSize(
+            width: (collectionViewLayout?.collectionViewContentSize)!.width + 2,
+            height: (collectionViewLayout?.collectionViewContentSize)!.height + 68))
     }
 
-}
+} 
 
 extension FieldCollectionView: FieldSettingsProvider {
 
     func getFieldSize() -> NSSize {
+        Swift.print(fieldDimensions)
         return fieldDimensions ?? NSSize(width: 0, height: 0)
     }
 
