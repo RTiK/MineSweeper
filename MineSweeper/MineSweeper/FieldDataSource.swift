@@ -107,6 +107,11 @@ class FieldDataSource: NSObject {
             cascade(cellWithIndex)
         }
         fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
+        Swift.print(minesLeftCounter)
+        if minesLeftCounter == 0 && incorrectCells.isEmpty {
+            timerLabel.stop()
+            Swift.print("YOU WON!")
+        }
     }
 
     private func countMines(atIndex: Int) -> Int {

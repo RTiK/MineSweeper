@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
@@ -165,35 +165,23 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" sceneMemberID="viewController">
-                    <visualEffectView key="view" wantsLayer="YES" appearanceType="vibrantDark" blendingMode="behindWindow" state="followsWindowActiveState" id="Dio-us-J1L">
+                    <visualEffectView key="view" appearanceType="vibrantDark" blendingMode="behindWindow" state="followsWindowActiveState" id="Dio-us-J1L">
                         <rect key="frame" x="0.0" y="0.0" width="523" height="617"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wRb-bm-1nx">
-                                <rect key="frame" x="18" y="571" width="64" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Mines" id="I20-Rx-xoE">
+                                <rect key="frame" x="47" y="571" width="64" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Mines" placeholderString="Mines" id="I20-Rx-xoE">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="OI3-ya-8Pj" name="displayPatternValue1" keyPath="self.minesLeftCounter" id="9q8-fP-V86">
-                                        <dictionary key="options">
-                                            <string key="NSDisplayPattern">Mines: %{value1}@</string>
-                                        </dictionary>
-                                    </binding>
+                                    <binding destination="OI3-ya-8Pj" name="value" keyPath="self.minesLeftCounter" id="ybb-lX-rZv"/>
                                 </connections>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerTextField" customModule="MineSweeper" customModuleProvider="target">
-                                <rect key="frame" x="367" y="571" width="64" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Time: 0" id="l7h-6s-GxS">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pVe-Eg-LOl">
-                                <rect key="frame" x="187" y="564" width="75" height="32"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pVe-Eg-LOl">
+                                <rect key="frame" x="224" y="564" width="75" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v8u-lu-Amt">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -229,17 +217,45 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zjy-M5-8km">
+                                <rect key="frame" x="483" y="569" width="20" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="7Rp-Fu-ZJM"/>
+                                    <constraint firstAttribute="width" constant="20" id="Ye6-xi-oRP"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Stopwatch_small" id="QTW-uW-Xir"/>
+                            </imageView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vr9-VQ-nGh">
+                                <rect key="frame" x="20" y="569" width="21" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Cx9-79-N0y"/>
+                                    <constraint firstAttribute="width" constant="21" id="m5K-v0-ja2"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="BKc-0W-YIf"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerTextField" customModule="MineSweeper" customModuleProvider="target">
+                                <rect key="frame" x="413" y="571" width="64" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Time" id="l7h-6s-GxS">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="LKe-2i-TKc" secondAttribute="bottom" id="23b-bx-0jc"/>
-                            <constraint firstItem="wRb-bm-1nx" firstAttribute="leading" secondItem="Dio-us-J1L" secondAttribute="leading" constant="20" id="8nq-E7-8GV"/>
-                            <constraint firstAttribute="trailing" secondItem="WFA-bY-VTB" secondAttribute="trailing" constant="20" id="8ye-zy-d3N"/>
+                            <constraint firstItem="Vr9-VQ-nGh" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="27" id="CU0-uu-Iyf"/>
                             <constraint firstItem="pVe-Eg-LOl" firstAttribute="centerX" secondItem="Dio-us-J1L" secondAttribute="centerX" id="DjN-65-V8U"/>
                             <constraint firstAttribute="trailing" secondItem="LKe-2i-TKc" secondAttribute="trailing" id="IOD-PX-qSS"/>
+                            <constraint firstAttribute="trailing" secondItem="Zjy-M5-8km" secondAttribute="trailing" constant="20" id="K0S-Ax-vmf"/>
+                            <constraint firstItem="wRb-bm-1nx" firstAttribute="leading" secondItem="Vr9-VQ-nGh" secondAttribute="trailing" constant="8" id="OQt-O3-S3Q"/>
+                            <constraint firstItem="Vr9-VQ-nGh" firstAttribute="leading" secondItem="Dio-us-J1L" secondAttribute="leading" constant="20" id="OpN-Ad-ceH"/>
                             <constraint firstItem="LKe-2i-TKc" firstAttribute="leading" secondItem="Dio-us-J1L" secondAttribute="leading" id="Sda-Sc-vdZ"/>
                             <constraint firstItem="wRb-bm-1nx" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="29" id="Tdh-VW-2qe"/>
                             <constraint firstItem="LKe-2i-TKc" firstAttribute="top" secondItem="pVe-Eg-LOl" secondAttribute="bottom" constant="20" id="Z8d-t8-BFV"/>
+                            <constraint firstItem="Zjy-M5-8km" firstAttribute="leading" secondItem="WFA-bY-VTB" secondAttribute="trailing" constant="8" id="keI-Iu-QyX"/>
                             <constraint firstItem="WFA-bY-VTB" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="29" id="mRV-UC-8Xj"/>
+                            <constraint firstItem="Zjy-M5-8km" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="27" id="nNh-JY-G50"/>
                             <constraint firstItem="pVe-Eg-LOl" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="25" id="qVV-Nx-HXr"/>
                         </constraints>
                     </visualEffectView>
@@ -255,4 +271,8 @@
             <point key="canvasLocation" x="75.5" y="903.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="Stopwatch_small" width="256" height="256"/>
+    </resources>
 </document>

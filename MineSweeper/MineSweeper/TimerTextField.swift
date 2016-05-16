@@ -11,7 +11,7 @@ import Cocoa
 class TimerTextField: NSTextField {
     var counter: Int = 0 {
         didSet {
-            stringValue = "Time: " + String(counter)
+            stringValue = String(counter)
         }
     }
     var timer: NSTimer!
