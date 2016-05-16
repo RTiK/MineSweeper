@@ -32,6 +32,7 @@ class FieldCollectionView: NSCollectionView {
         numberOfMines = 40
         resetGame(sender)
     }
+
     func prepareExpertGame(sender: NSMenuItem) {
         fieldDimensions = NSSize(width: 30, height: 16)
         numberOfMines = 99
@@ -44,6 +45,7 @@ class FieldCollectionView: NSCollectionView {
         window?.setContentSize(NSSize(
             width: (collectionViewLayout?.collectionViewContentSize)!.width + 2,
             height: (collectionViewLayout?.collectionViewContentSize)!.height + 68))
+
     }
 
 } 
@@ -51,7 +53,6 @@ class FieldCollectionView: NSCollectionView {
 extension FieldCollectionView: FieldSettingsProvider {
 
     func getFieldSize() -> NSSize {
-        Swift.print(fieldDimensions)
         return fieldDimensions ?? NSSize(width: 0, height: 0)
     }
 

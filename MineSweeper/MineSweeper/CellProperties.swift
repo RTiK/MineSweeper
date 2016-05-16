@@ -27,4 +27,5 @@ class CellProperties {
     static let TYPE_EMPTY_FLAG: Int = -4
     static let TYPE_MINE_QUESTION: Int = -5
     static let TYPE_EMPTY_QUESTION: Int = -6
+    static let TYPE_MINE_EXPLODED: Int = -7
 }

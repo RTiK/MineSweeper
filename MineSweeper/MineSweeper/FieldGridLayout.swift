@@ -42,7 +42,6 @@ class FieldGridLayout: NSCollectionViewGridLayout {
     }
 
     override var collectionViewContentSize: NSSize {
-        Swift.print(contentSize ?? NSSize(width: 100, height: 100))
         return contentSize ?? NSSize(width: 100, height: 100)
     }
 

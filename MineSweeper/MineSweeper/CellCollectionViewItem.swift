@@ -12,45 +12,71 @@ class CellCollectionViewItem: NSCollectionViewItem {
 
     var dataSource: FieldDataSource!
     var index: Int!
+    var disabled: Bool!
 
     override var representedObject: AnyObject? {
         didSet {
             if representedObject != nil {
                 view.wantsLayer = true
                 let cellType = representedObject as! Int
-                textField?.textColor = NSColor.whiteColor()
+                var cellTextColor = NSColor(red: 1, green: 1, blue: 1, alpha: 1)
+                var cellColor = CellProperties.COLOR_CELL_EMPTY
+                var cellText = ""
+
                 if cellType > 0 {
-                    textField?.stringValue = String(cellType)
-                    view.layer?.backgroundColor = CellProperties.COLOR_CELL_DARK.CGColor
-                } else if cellType == CellProperties.TYPE_EMPTY {
-                    textField?.stringValue = ""
-                    view.layer?.backgroundColor = CellProperties.COLOR_CELL_EMPTY.CGColor
+                    cellText = String(cellType)
+                    cellColor = CellProperties.COLOR_CELL_DARK
                 } else if cellType == CellProperties.TYPE_VISITED {
-                    textField?.stringValue = ""
-                    view.layer?.backgroundColor = CellProperties.COLOR_CELL_LIGHT.CGColor
+                    cellColor = CellProperties.COLOR_CELL_LIGHT
                 } else if cellType == CellProperties.TYPE_MINE_FLAG || cellType == CellProperties.TYPE_EMPTY_FLAG {
-                    textField?.stringValue = ""
-                    view.layer?.backgroundColor = CellProperties.COLOR_MINE_MEDUIM.CGColor
+                    cellColor = CellProperties.COLOR_MINE_MEDUIM
                 } else if cellType == CellProperties.TYPE_MINE {
-                    textField?.stringValue = ""
-                    view.layer?.backgroundColor = CellProperties.COLOR_CELL_EMPTY.CGColor
+                    cellColor = CellProperties.COLOR_CELL_EMPTY
                 } else if (cellType == CellProperties.TYPE_EMPTY_QUESTION || cellType == CellProperties.TYPE_MINE_QUESTION) {
-                    textField?.textColor = NSColor.blackColor()
-                    textField?.stringValue = "?"
-                    view.layer?.backgroundColor = CellProperties.COLOR_CELL_GREEN.CGColor
+                    cellTextColor = NSColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+                    cellText = "?"
+                    cellColor = CellProperties.COLOR_CELL_GREEN
                 }
+
+                if ((disabled) != nil && disabled) {
+                    if cellType == CellProperties.TYPE_MINE {
+                        cellColor = CellProperties.COLOR_MINE_MEDUIM
+                    }
+                    cellColor = NSColor(
+                        red: cellColor.redComponent,
+                        green: cellColor.greenComponent,
+                        blue: cellColor.blueComponent,
+                        alpha: 0.5)
+                    cellTextColor = NSColor(
+                        red: cellTextColor.redComponent,
+                        green: cellTextColor.greenComponent,
+                        blue: cellTextColor.blueComponent,
+                        alpha: 0.5)
+                }
+
+                if cellType == CellProperties.TYPE_MINE_EXPLODED {
+                    cellColor = CellProperties.COLOR_MINE_DARK
+                    cellText = "!"
+                }
+
+                view.layer?.backgroundColor = cellColor.CGColor
+                textField?.stringValue = cellText
+                textField?.textColor = cellTextColor
+
+
             }
         }
     }
 
     override func mouseUp(theEvent: NSEvent) {
-        let gameOver = dataSource.uncover(index)
-        if gameOver {
-            view.layer?.backgroundColor = CellProperties.COLOR_MINE_DARK.CGColor
+        if !disabled {
+            dataSource.uncover(index)
         }
     }
 
     override func rightMouseUp(theEvent: NSEvent) {
-        dataSource.markMine(index)
+        if !disabled {
+            dataSource.markMine(index)
+        }
     }
 }

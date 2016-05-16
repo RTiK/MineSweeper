@@ -32,6 +32,7 @@ class FieldDataSource: NSObject {
         minesLeftCounter = numberOfMines
         timerLabel.reset()
         firstMove = true
+        gameOver = false
         print("game reset")
     }
 
@@ -84,7 +85,7 @@ class FieldDataSource: NSObject {
         fieldCollectionView.reloadItemsAtIndexPaths(Set<NSIndexPath>(arrayLiteral: NSIndexPath(forItem: cellAtIndex, inSection: 0)))
     }
 
-    func uncover(cellWithIndex: Int) -> Bool {
+    func uncover(cellWithIndex: Int) {
         cellsToRefresh = Set<NSIndexPath>()
 
         let currentCell = dataArray[cellWithIndex]
@@ -99,13 +100,13 @@ class FieldDataSource: NSObject {
         } else if (currentCell == CellProperties.TYPE_MINE) {
             timerLabel.stop()
             resolveIncorrect()
-            print("GAME OVER")  // TODO: Put game over here
-            return true
+            gameOver = true
+            dataArray[cellWithIndex] = CellProperties.TYPE_MINE_EXPLODED
+            fieldCollectionView.reloadData()
         } else if (currentCell == CellProperties.TYPE_EMPTY) {
             cascade(cellWithIndex)
         }
         fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
-        return false
     }
 
     private func countMines(atIndex: Int) -> Int {
@@ -218,6 +219,7 @@ extension FieldDataSource: NSCollectionViewDataSource {
         let item = collectionView.makeItemWithIdentifier("cellItem", forIndexPath: indexPath) as! CellCollectionViewItem
         item.dataSource = self
         item.index = indexPath.indexAtPosition(1)
+        item.disabled = gameOver
         if dataArray.count > 0 {
             item.representedObject = dataArray[indexPath.indexAtPosition(1)]
         }
