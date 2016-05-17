@@ -30,6 +30,7 @@ class FieldDataSource: NSObject {
         dataArray = [Int](count: Int(width * height), repeatedValue: 0)
         placeMines(numberOfMines)
         minesLeftCounter = numberOfMines
+        incorrectCells.removeAll()
         timerLabel.reset()
         firstMove = true
         gameOver = false
@@ -59,6 +60,16 @@ class FieldDataSource: NSObject {
         fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
     }
 
+    private func resolveAll() {
+        resolveIncorrect()
+        for cellIndex in 0 ... dataArray.count-1 {
+            if dataArray[cellIndex] == CellProperties.TYPE_EMPTY {
+                dataArray[cellIndex] = countMines(cellIndex)
+            }
+        }
+        fieldCollectionView.reloadData()    // TODO refresh only newly uncovered fields
+    }
+
     func markMine(cellAtIndex: Int) {
         let currentCell = dataArray[cellAtIndex]
         if currentCell == CellProperties.TYPE_EMPTY {
@@ -81,6 +92,11 @@ class FieldDataSource: NSObject {
         } else if currentCell == CellProperties.TYPE_MINE_QUESTION {
             dataArray[cellAtIndex] = CellProperties.TYPE_MINE
             incorrectCells.remove(cellAtIndex)
+        }
+        if isSolved() {
+            timerLabel.stop()
+            resolveAll()
+            Swift.print("YOU WON")
         }
         fieldCollectionView.reloadItemsAtIndexPaths(Set<NSIndexPath>(arrayLiteral: NSIndexPath(forItem: cellAtIndex, inSection: 0)))
     }
@@ -106,12 +122,17 @@ class FieldDataSource: NSObject {
         } else if (currentCell == CellProperties.TYPE_EMPTY) {
             cascade(cellWithIndex)
         }
-        fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
-        Swift.print(minesLeftCounter)
-        if minesLeftCounter == 0 && incorrectCells.isEmpty {
+        if isSolved() {
             timerLabel.stop()
-            Swift.print("YOU WON!")
+            resolveAll()
+            Swift.print("YOU WON")
         }
+        fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
+
+    }
+
+    private func isSolved() -> Bool {
+        return minesLeftCounter == 0 && incorrectCells.isEmpty
     }
 
     private func countMines(atIndex: Int) -> Int {

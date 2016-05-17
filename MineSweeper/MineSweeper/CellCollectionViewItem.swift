@@ -61,8 +61,6 @@ class CellCollectionViewItem: NSCollectionViewItem {
                 view.layer?.backgroundColor = cellColor.CGColor
                 textField?.stringValue = cellText
                 textField?.textColor = cellTextColor
-
-
             }
         }
     }
