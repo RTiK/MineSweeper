@@ -38,22 +38,16 @@ class CellCollectionViewItem: NSCollectionViewItem {
                     cellColor = CellProperties.COLOR_CELL_GREEN
                 }
 
-                if ((disabled) != nil && disabled) {
+                if ((disabled) != nil && disabled) {    // display game over state
                     if cellType == CellProperties.TYPE_MINE_FLAG {
-                        cellColor = CellProperties.COLOR_MINE_MEDUIM
                         cellText = "✓"
-                    }
-                    if cellType == CellProperties.TYPE_EMPTY_FLAG {
-                        cellColor = CellProperties.COLOR_MINE_DARK
+                    } else if cellType == CellProperties.TYPE_EMPTY_FLAG {
                         cellText = "✗"
-                    }
-                    if cellType == CellProperties.TYPE_MINE_EXPLODED {
+                    } else if cellType == CellProperties.TYPE_MINE_EXPLODED {
                         cellColor = CellProperties.COLOR_MINE_DARK
                         cellText = "!"
                     }
-                    if cellType == CellProperties.TYPE_MINE {
-                        cellColor = CellProperties.COLOR_MINE_MEDUIM
-                    }
+
                     cellColor = NSColor(
                         red: cellColor.redComponent,
                         green: cellColor.greenComponent,

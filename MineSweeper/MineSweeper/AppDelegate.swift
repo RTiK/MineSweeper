@@ -19,6 +19,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
+    func prepareAdvancedGame(sender: NSMenuItem) {
+        WindowController()
+        // TODO make new window if the old one has been closed
+    }
 
 }
 

@@ -147,7 +147,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" customClass="WindowController" customModule="MineSweeper" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -169,6 +169,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="523" height="617"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="pVe-Eg-LOl">
+                                <rect key="frame" x="224" y="564" width="75" height="32"/>
+                                <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v8u-lu-Amt">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="resetGame:" target="rPt-NT-nkU" id="5ra-jy-N55"/>
+                                </connections>
+                            </button>
                             <scrollView horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" borderType="line" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" findBarPosition="belowContent" translatesAutoresizingMaskIntoConstraints="NO" id="LKe-2i-TKc">
                                 <rect key="frame" x="0.0" y="0.0" width="523" height="551"/>
                                 <clipView key="contentView" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" drawsBackground="NO" copiesOnScroll="NO" id="hPo-A3-Ins">
@@ -196,8 +206,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zjy-M5-8km">
-                                <rect key="frame" x="483" y="569" width="20" height="21"/>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zjy-M5-8km">
+                                <rect key="frame" x="313" y="571" width="21" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="7Rp-Fu-ZJM"/>
                                     <constraint firstAttribute="width" constant="21" id="ICr-Ky-JSM"/>
@@ -205,24 +215,16 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Stopwatch" id="QTW-uW-Xir"/>
                             </imageView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vr9-VQ-nGh">
-                                <rect key="frame" x="20" y="569" width="21" height="21"/>
+                                <rect key="frame" x="189" y="571" width="21" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Cx9-79-N0y"/>
                                     <constraint firstAttribute="width" constant="21" id="m5K-v0-ja2"/>
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Mine" id="BKc-0W-YIf"/>
                             </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerTextField" customModule="MineSweeper" customModuleProvider="target">
-                                <rect key="frame" x="418" y="571" width="64" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Time" id="l7h-6s-GxS">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wRb-bm-1nx">
-                                <rect key="frame" x="42" y="571" width="64" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Mines" placeholderString="Mines" id="I20-Rx-xoE">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wRb-bm-1nx">
+                                <rect key="frame" x="148" y="573" width="40" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Mines" placeholderString="Mines" id="I20-Rx-xoE">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -231,32 +233,30 @@
                                     <binding destination="OI3-ya-8Pj" name="value" keyPath="self.minesLeftCounter" id="ybb-lX-rZv"/>
                                 </connections>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pVe-Eg-LOl">
-                                <rect key="frame" x="224" y="564" width="75" height="32"/>
-                                <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v8u-lu-Amt">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerTextField" customModule="MineSweeper" customModuleProvider="target">
+                                <rect key="frame" x="335" y="573" width="34" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Time" id="l7h-6s-GxS">
                                     <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="resetGame:" target="rPt-NT-nkU" id="5ra-jy-N55"/>
-                                </connections>
-                            </button>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="Zjy-M5-8km" firstAttribute="leading" secondItem="pVe-Eg-LOl" secondAttribute="trailing" constant="20" id="0ka-Wq-hur"/>
                             <constraint firstAttribute="bottom" secondItem="LKe-2i-TKc" secondAttribute="bottom" id="23b-bx-0jc"/>
-                            <constraint firstItem="wRb-bm-1nx" firstAttribute="leading" secondItem="Vr9-VQ-nGh" secondAttribute="trailing" constant="3" id="A8O-Yc-FN9"/>
-                            <constraint firstItem="Vr9-VQ-nGh" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="27" id="CU0-uu-Iyf"/>
+                            <constraint firstItem="pVe-Eg-LOl" firstAttribute="leading" secondItem="Vr9-VQ-nGh" secondAttribute="trailing" constant="20" id="2OO-LS-KAf"/>
                             <constraint firstItem="pVe-Eg-LOl" firstAttribute="centerX" secondItem="Dio-us-J1L" secondAttribute="centerX" id="DjN-65-V8U"/>
+                            <constraint firstItem="WFA-bY-VTB" firstAttribute="leading" secondItem="Zjy-M5-8km" secondAttribute="trailing" constant="3" id="Ex2-ea-Xs7"/>
+                            <constraint firstItem="wRb-bm-1nx" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="27" id="HT1-pc-csn"/>
                             <constraint firstAttribute="trailing" secondItem="LKe-2i-TKc" secondAttribute="trailing" id="IOD-PX-qSS"/>
-                            <constraint firstAttribute="trailing" secondItem="Zjy-M5-8km" secondAttribute="trailing" constant="20" id="K0S-Ax-vmf"/>
-                            <constraint firstItem="Vr9-VQ-nGh" firstAttribute="leading" secondItem="Dio-us-J1L" secondAttribute="leading" constant="20" id="OpN-Ad-ceH"/>
+                            <constraint firstItem="Vr9-VQ-nGh" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="25" id="QN8-Ki-u7M"/>
                             <constraint firstItem="LKe-2i-TKc" firstAttribute="leading" secondItem="Dio-us-J1L" secondAttribute="leading" id="Sda-Sc-vdZ"/>
-                            <constraint firstItem="wRb-bm-1nx" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="29" id="Tdh-VW-2qe"/>
+                            <constraint firstItem="WFA-bY-VTB" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="27" id="Yph-uM-Xt9"/>
                             <constraint firstItem="LKe-2i-TKc" firstAttribute="top" secondItem="pVe-Eg-LOl" secondAttribute="bottom" constant="20" id="Z8d-t8-BFV"/>
-                            <constraint firstItem="Zjy-M5-8km" firstAttribute="leading" secondItem="WFA-bY-VTB" secondAttribute="trailing" constant="3" id="hpj-X4-u9Y"/>
-                            <constraint firstItem="WFA-bY-VTB" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="29" id="mRV-UC-8Xj"/>
-                            <constraint firstItem="Zjy-M5-8km" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="27" id="nNh-JY-G50"/>
+                            <constraint firstItem="Zjy-M5-8km" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="25" id="q36-cW-iD2"/>
                             <constraint firstItem="pVe-Eg-LOl" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="25" id="qVV-Nx-HXr"/>
+                            <constraint firstItem="Vr9-VQ-nGh" firstAttribute="leading" secondItem="wRb-bm-1nx" secondAttribute="trailing" constant="3" id="rwv-ur-SxC"/>
                         </constraints>
                     </visualEffectView>
                 </viewController>
@@ -268,7 +268,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="75.5" y="903.5"/>
+            <point key="canvasLocation" x="706.5" y="383.5"/>
         </scene>
     </scenes>
     <resources>

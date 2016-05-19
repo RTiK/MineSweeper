@@ -26,6 +26,9 @@ class TimerTextField: NSTextField {
 
     func tick() {
         counter += 1
+        if counter == 999 {
+            stop()  // you fell asleep
+        }
     }
 
     func reset() {

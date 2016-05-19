@@ -53,7 +53,6 @@ class FieldDataSource: NSObject {
     private func resolveIncorrect() {
         cellsToRefresh = Set<NSIndexPath>()
         for cell in incorrectCells {
-            //dataArray[cell] = CellProperties.TYPE_MINE_FLAG
             cellsToRefresh.insert(NSIndexPath(forItem: cell, inSection: 0))
         }
         fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
@@ -102,7 +101,8 @@ class FieldDataSource: NSObject {
             timerLabel.stop()
             resolveAll()
         }
-        fieldCollectionView.reloadItemsAtIndexPaths(Set<NSIndexPath>(arrayLiteral: NSIndexPath(forItem: cellAtIndex, inSection: 0)))
+        fieldCollectionView.reloadItemsAtIndexPaths(
+            Set<NSIndexPath>(arrayLiteral: NSIndexPath(forItem: cellAtIndex, inSection: 0)))
     }
 
     func uncover(cellWithIndex: Int) {
