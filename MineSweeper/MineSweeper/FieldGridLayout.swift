@@ -25,7 +25,6 @@ class FieldGridLayout: NSCollectionViewGridLayout {
         let numberOfItems = fieldWidth * fieldHeight
 
         if numberOfItems > 0 {
-
             contentSize = NSSize(width: viewWidth, height: viewHeight)
             layoutAttributes = [NSCollectionViewLayoutAttributes]()
 
@@ -42,7 +41,7 @@ class FieldGridLayout: NSCollectionViewGridLayout {
     }
 
     override var collectionViewContentSize: NSSize {
-        return contentSize ?? NSSize(width: 100, height: 100)
+        return contentSize ?? NSSize(width: 200, height: 200)
     }
 
     override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes? {
@@ -55,7 +54,6 @@ class FieldGridLayout: NSCollectionViewGridLayout {
     }
 
     override func layoutAttributesForElementsInRect(rect: NSRect) -> [NSCollectionViewLayoutAttributes] {
-        collectionView?.setFrameSize(collectionViewContentSize)
         return layoutAttributes
     }
     

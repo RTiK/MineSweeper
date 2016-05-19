@@ -9,8 +9,8 @@
 import Cocoa
 
 class CellProperties {
-    static let CELL_WIDTH = 25
-    static let CELL_HEIGHT = 25
+    static let CELL_WIDTH = 30//25
+    static let CELL_HEIGHT = 30//25
 
     static let COLOR_MINE_LIGHT = NSColor(red: 1.0, green: 0.38, blue: 0.37, alpha: 1.0)
     static let COLOR_MINE_MEDUIM = NSColor(red: 1.0, green: 0.28, blue: 0.27, alpha: 1.0)  // 0xFF4746

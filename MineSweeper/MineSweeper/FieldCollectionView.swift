@@ -40,6 +40,7 @@ class FieldCollectionView: NSCollectionView {
     }
 
     func resetGame(sender: NSMenuItem) {
+        collectionViewLayout?.prepareLayout()
         (self.dataSource as! FieldDataSource).resetGame()
         reloadData()
         window?.setContentSize(NSSize(

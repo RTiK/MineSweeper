@@ -26,6 +26,5 @@ class WindowController: NSWindowController {
     override func awakeFromNib() {
         super.awakeFromNib()
         window?.titlebarAppearsTransparent = true
-        window?.movableByWindowBackground  = true
     }
 }

@@ -34,7 +34,6 @@ class FieldDataSource: NSObject {
         timerLabel.reset()
         firstMove = true
         gameOver = false
-        print("game reset")
     }
 
     private func placeMines(numberOfMInes: Int) {
@@ -54,7 +53,7 @@ class FieldDataSource: NSObject {
     private func resolveIncorrect() {
         cellsToRefresh = Set<NSIndexPath>()
         for cell in incorrectCells {
-            dataArray[cell] = CellProperties.TYPE_MINE_FLAG
+            //dataArray[cell] = CellProperties.TYPE_MINE_FLAG
             cellsToRefresh.insert(NSIndexPath(forItem: cell, inSection: 0))
         }
         fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
@@ -64,10 +63,16 @@ class FieldDataSource: NSObject {
         resolveIncorrect()
         for cellIndex in 0 ... dataArray.count-1 {
             if dataArray[cellIndex] == CellProperties.TYPE_EMPTY {
-                dataArray[cellIndex] = countMines(cellIndex)
+                let numOfMines = countMines(cellIndex)
+                if numOfMines > 0 {
+                    dataArray[cellIndex] = numOfMines
+                } else if numOfMines == 0 {
+                    dataArray[cellIndex] = CellProperties.TYPE_VISITED
+                }
+                cellsToRefresh.insert(NSIndexPath(forItem: cellIndex, inSection: 0))
             }
         }
-        fieldCollectionView.reloadData()    // TODO refresh only newly uncovered fields
+        fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
     }
 
     func markMine(cellAtIndex: Int) {
@@ -96,7 +101,6 @@ class FieldDataSource: NSObject {
         if isSolved() {
             timerLabel.stop()
             resolveAll()
-            Swift.print("YOU WON")
         }
         fieldCollectionView.reloadItemsAtIndexPaths(Set<NSIndexPath>(arrayLiteral: NSIndexPath(forItem: cellAtIndex, inSection: 0)))
     }
@@ -107,8 +111,8 @@ class FieldDataSource: NSObject {
         let currentCell = dataArray[cellWithIndex]
         if firstMove {
             if currentCell == CellProperties.TYPE_MINE {
-                dataArray[cellWithIndex] = CellProperties.TYPE_EMPTY   // a mine should not be uncovered on first click
-                placeMineAtRandom() // it should be moved to a random free position instead
+                dataArray[cellWithIndex] = CellProperties.TYPE_EMPTY    // a mine should not be uncovered on first click
+                placeMineAtRandom()                                     // it should be moved to a random free position instead
             }
             timerLabel.start()
             firstMove = false
@@ -125,10 +129,8 @@ class FieldDataSource: NSObject {
         if isSolved() {
             timerLabel.stop()
             resolveAll()
-            Swift.print("YOU WON")
         }
         fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
-
     }
 
     private func isSolved() -> Bool {

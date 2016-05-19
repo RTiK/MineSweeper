@@ -39,6 +39,21 @@ class CellCollectionViewItem: NSCollectionViewItem {
                 }
 
                 if ((disabled) != nil && disabled) {
+                    if cellType == CellProperties.TYPE_MINE_FLAG {
+                        cellColor = CellProperties.COLOR_MINE_MEDUIM
+                        cellText = "✓"
+                    }
+                    if cellType == CellProperties.TYPE_EMPTY_FLAG {
+                        cellColor = CellProperties.COLOR_MINE_DARK
+                        cellText = "✗"
+                    }
+                    if cellType == CellProperties.TYPE_MINE_EXPLODED {
+                        cellColor = CellProperties.COLOR_MINE_DARK
+                        cellText = "!"
+                    }
+                    if cellType == CellProperties.TYPE_MINE {
+                        cellColor = CellProperties.COLOR_MINE_MEDUIM
+                    }
                     cellColor = NSColor(
                         red: cellColor.redComponent,
                         green: cellColor.greenComponent,
@@ -49,13 +64,6 @@ class CellCollectionViewItem: NSCollectionViewItem {
                         green: cellTextColor.greenComponent,
                         blue: cellTextColor.blueComponent,
                         alpha: 0.5)
-                    if cellType == CellProperties.TYPE_MINE {
-                        cellColor = CellProperties.COLOR_MINE_MEDUIM
-                    }
-                    if cellType == CellProperties.TYPE_MINE_EXPLODED {
-                        cellColor = CellProperties.COLOR_MINE_DARK
-                        cellText = "!"
-                    }
                 }
 
                 view.layer?.backgroundColor = cellColor.CGColor
