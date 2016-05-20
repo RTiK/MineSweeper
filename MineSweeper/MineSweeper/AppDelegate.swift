@@ -11,6 +11,9 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    //var windowController: WindowController?
+    var fieldCollectionView: FieldCollectionView?
+
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
     }
@@ -22,15 +25,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // in case the game window has been closed the actions from the menu will caught here
     // these methods will instantiate a new window and pass the field size to it
     func prepareBeginnerGame(sender: NSMenuItem) {
-        // TODO make new window if the old one has been closed
+        fieldCollectionView!.prepareBeginnerGame(sender)
     }
 
     func prepareIntermediateGame(sender: NSMenuItem) {
-        
+        fieldCollectionView?.prepareIntermediateGame(sender)
     }
     
     func prepareExpertGame(sender: NSMenuItem) {
-        
+        fieldCollectionView?.prepareExpertGame(sender)
     }
 
 }

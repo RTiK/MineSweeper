@@ -65,17 +65,17 @@
                                                 <items>
                                                     <menuItem title="Beginner" keyEquivalent="1" id="wQr-r4-pGw">
                                                         <connections>
-                                                            <action selector="prepareBeginnerGame:" target="Ady-hI-5gd" id="Egk-of-L1w"/>
+                                                            <action selector="prepareBeginnerGame:" target="Ady-hI-5gd" id="NYF-tv-NjY"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Intermediate" keyEquivalent="2" id="4G0-oD-RJE">
                                                         <connections>
-                                                            <action selector="prepareIntermediateGame:" target="Ady-hI-5gd" id="wfG-YR-0D4"/>
+                                                            <action selector="prepareIntermediateGame:" target="Ady-hI-5gd" id="rTt-Nl-aCf"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Expert" keyEquivalent="3" id="OGa-nX-bir">
                                                         <connections>
-                                                            <action selector="prepareExpertGame:" target="Ady-hI-5gd" id="XMC-6O-s8E"/>
+                                                            <action selector="prepareExpertGame:" target="Ady-hI-5gd" id="GTu-C1-7LV"/>
                                                         </connections>
                                                     </menuItem>
                                                 </items>
@@ -83,7 +83,7 @@
                                         </menuItem>
                                         <menuItem title="Reset Game" keyEquivalent="r" id="cQz-4X-8sd">
                                             <connections>
-                                                <action selector="resetGame:" target="Ady-hI-5gd" id="8Ru-bE-3FR"/>
+                                                <action selector="resetGame:" target="Ady-hI-5gd" id="OSo-qy-XOn"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>

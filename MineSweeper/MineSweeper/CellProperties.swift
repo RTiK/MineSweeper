@@ -19,6 +19,8 @@ class CellProperties {
     static let COLOR_CELL_LIGHT = NSColor(red: 0.14, green: 0.54, blue: 0.80, alpha: 1.0) // 0x248ACC
     static let COLOR_CELL_DARK = NSColor(red: 0.16, green: 0.49, blue: 0.70, alpha: 1.0)  // 0x287DB2
     static let COLOR_CELL_GREEN = NSColor(red: 0.5, green: 0.99, blue: 0.38, alpha: 1.0)
+    static let COLOR_CELL_PRESSED = NSColor(red: 1.0, green: 0.99, blue: 0.38, alpha: 0.5)  // 0xFFFD60
+
 
     static let TYPE_EMPTY: Int = 0
     static let TYPE_MINE: Int = -1

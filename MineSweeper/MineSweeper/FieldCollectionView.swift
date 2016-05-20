@@ -15,6 +15,8 @@ class FieldCollectionView: NSCollectionView {
 
     override func awakeFromNib() {
         registerNib(NSNib(nibNamed: "CellCollectionViewItem", bundle: nil), forItemWithIdentifier: "cellItem")
+        let appDelegate = NSApp.delegate as! AppDelegate
+        appDelegate.fieldCollectionView = self
     }
 
     override var acceptsFirstResponder: Bool {
@@ -40,13 +42,13 @@ class FieldCollectionView: NSCollectionView {
     }
 
     func resetGame(sender: NSMenuItem) {
+        window?.windowController?.showWindow(self)
         collectionViewLayout?.prepareLayout()
         (self.dataSource as! FieldDataSource).resetGame()
         reloadData()
         window?.setContentSize(NSSize(
             width: (collectionViewLayout?.collectionViewContentSize)!.width + 2,
             height: (collectionViewLayout?.collectionViewContentSize)!.height + 68))
-
     }
 
 } 
