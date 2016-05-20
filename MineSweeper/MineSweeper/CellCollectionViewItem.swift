@@ -39,7 +39,9 @@ class CellCollectionViewItem: NSCollectionViewItem {
                 }
 
                 if ((disabled) != nil && disabled) {    // display game over state
-                    if cellType == CellProperties.TYPE_MINE_FLAG {
+                    if cellType == CellProperties.TYPE_MINE {
+                        cellColor = CellProperties.COLOR_MINE_LIGHT
+                    } else if cellType == CellProperties.TYPE_MINE_FLAG {
                         cellText = "✓"
                     } else if cellType == CellProperties.TYPE_EMPTY_FLAG {
                         cellText = "✗"

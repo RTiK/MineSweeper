@@ -18,10 +18,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
     }
-
-    func prepareAdvancedGame(sender: NSMenuItem) {
-        WindowController()
+    
+    // in case the game window has been closed the actions from the menu will caught here
+    // these methods will instantiate a new window and pass the field size to it
+    func prepareBeginnerGame(sender: NSMenuItem) {
         // TODO make new window if the old one has been closed
+    }
+
+    func prepareIntermediateGame(sender: NSMenuItem) {
+        
+    }
+    
+    func prepareExpertGame(sender: NSMenuItem) {
+        
     }
 
 }

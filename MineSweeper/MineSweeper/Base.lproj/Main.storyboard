@@ -70,7 +70,7 @@
                                                     </menuItem>
                                                     <menuItem title="Intermediate" keyEquivalent="2" id="4G0-oD-RJE">
                                                         <connections>
-                                                            <action selector="prepareAdvancedGame:" target="Ady-hI-5gd" id="M35-xH-oLU"/>
+                                                            <action selector="prepareIntermediateGame:" target="Ady-hI-5gd" id="wfG-YR-0D4"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Expert" keyEquivalent="3" id="OGa-nX-bir">
@@ -169,7 +169,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="523" height="617"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="pVe-Eg-LOl">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pVe-Eg-LOl">
                                 <rect key="frame" x="224" y="564" width="75" height="32"/>
                                 <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v8u-lu-Amt">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

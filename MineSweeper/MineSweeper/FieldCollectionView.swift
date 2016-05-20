@@ -27,7 +27,7 @@ class FieldCollectionView: NSCollectionView {
         resetGame(sender)
     }
 
-    func prepareAdvancedGame(sender: NSMenuItem) {
+    func prepareIntermediateGame(sender: NSMenuItem) {
         fieldDimensions = NSSize(width: 16, height: 16)
         numberOfMines = 40
         resetGame(sender)
