@@ -122,6 +122,7 @@ class FieldDataSource: NSObject {
             resolveIncorrect()
             gameOver = true
             dataArray[cellWithIndex] = CellProperties.TYPE_MINE_EXPLODED
+            fieldCollectionView.reloadData()
         } else if (currentCell == CellProperties.TYPE_EMPTY) {
             cascade(cellWithIndex)
         }

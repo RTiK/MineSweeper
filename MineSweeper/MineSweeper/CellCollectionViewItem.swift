@@ -38,7 +38,7 @@ class CellCollectionViewItem: NSCollectionViewItem {
                     cellColor = CellProperties.COLOR_CELL_GREEN
                 }
 
-                if ((disabled) != nil && disabled) {    // display game over state
+                if (disabled != nil && disabled) {    // display game over state
                     if cellType == CellProperties.TYPE_MINE {
                         cellColor = CellProperties.COLOR_MINE_LIGHT
                     } else if cellType == CellProperties.TYPE_MINE_FLAG {
