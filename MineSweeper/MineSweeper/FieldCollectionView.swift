@@ -10,15 +10,16 @@ import Cocoa
 
 class FieldCollectionView: NSCollectionView {
 
-    private var fieldDimensions: NSSize!
-    private var numberOfMines: Int!
+    private var fieldDimensions = NSSize(width: 1, height: 1)
+    private var numberOfMines = 0
 
     override func awakeFromNib() {
         registerNib(NSNib(nibNamed: "CellCollectionViewItem", bundle: nil), forItemWithIdentifier: "cellItem")
         let appDelegate = NSApp.delegate as! AppDelegate
         appDelegate.fieldCollectionView = self
 
-        setGameParams(NSSize(width: 9, height: 9), mines: 10)
+        fieldDimensions = NSSize(width: 9, height: 9)
+        numberOfMines = 10
         resetGame(self)
     }
 
@@ -47,13 +48,13 @@ class FieldCollectionView: NSCollectionView {
     }
 
     func resetGame(sender: AnyObject) {
-        window?.windowController?.showWindow(self)
         collectionViewLayout?.prepareLayout()
         (self.dataSource as! FieldDataSource).resetGame()
         reloadData()
         window?.setContentSize(NSSize(
             width: (collectionViewLayout?.collectionViewContentSize)!.width + 2,
             height: (collectionViewLayout?.collectionViewContentSize)!.height + 68))
+        window?.windowController?.showWindow(self)  // in case the window has been closed
     }
 
 } 
@@ -61,7 +62,7 @@ class FieldCollectionView: NSCollectionView {
 extension FieldCollectionView: FieldSettingsProvider {
 
     func getFieldSize() -> NSSize {
-        return fieldDimensions ?? NSSize(width: 0, height: 0)
+        return fieldDimensions
     }
 
     func getNumberOfMines() -> Int {

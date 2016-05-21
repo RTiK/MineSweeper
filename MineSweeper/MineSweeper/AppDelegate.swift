@@ -22,10 +22,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
     
-    // in case the game window has been closed the actions from the menu will caught here
-    // these methods will instantiate a new window and pass the field size to it
+    // in case the game window has been closed the actions from the menu will be caught
+    // here these methods will instantiate a new window and pass the field size to it
     func prepareBeginnerGame(sender: NSMenuItem) {
-        fieldCollectionView!.prepareBeginnerGame(sender)
+        fieldCollectionView?.prepareBeginnerGame(sender)
     }
 
     func prepareIntermediateGame(sender: NSMenuItem) {
@@ -35,7 +35,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func prepareExpertGame(sender: NSMenuItem) {
         fieldCollectionView?.prepareExpertGame(sender)
     }
-
 }
 
 class WindowController: NSWindowController {

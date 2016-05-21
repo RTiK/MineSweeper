@@ -166,27 +166,17 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" sceneMemberID="viewController">
                     <visualEffectView key="view" appearanceType="vibrantDark" blendingMode="behindWindow" state="followsWindowActiveState" id="Dio-us-J1L">
-                        <rect key="frame" x="0.0" y="0.0" width="523" height="617"/>
+                        <rect key="frame" x="0.0" y="0.0" width="233" height="301"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pVe-Eg-LOl">
-                                <rect key="frame" x="224" y="564" width="75" height="32"/>
-                                <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v8u-lu-Amt">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="resetGame:" target="rPt-NT-nkU" id="WJ1-Ct-qok"/>
-                                </connections>
-                            </button>
                             <scrollView horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" borderType="line" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" findBarPosition="belowContent" translatesAutoresizingMaskIntoConstraints="NO" id="LKe-2i-TKc">
-                                <rect key="frame" x="0.0" y="0.0" width="523" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="233" height="235"/>
                                 <clipView key="contentView" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" drawsBackground="NO" copiesOnScroll="NO" id="hPo-A3-Ins">
-                                    <rect key="frame" x="1" y="1" width="521" height="549"/>
+                                    <rect key="frame" x="1" y="1" width="231" height="233"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView id="WiJ-Sb-zbh" customClass="FieldCollectionView" customModule="MineSweeper" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="521" height="549"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="231" height="233"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <collectionViewLayout key="collectionViewLayout" id="bOo-lN-sY9" customClass="FieldGridLayout" customModule="MineSweeper" customModuleProvider="target"/>
                                             <color key="primaryBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -206,8 +196,18 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pVe-Eg-LOl">
+                                <rect key="frame" x="79" y="248" width="75" height="32"/>
+                                <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v8u-lu-Amt">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="resetGame:" target="rPt-NT-nkU" id="WJ1-Ct-qok"/>
+                                </connections>
+                            </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zjy-M5-8km">
-                                <rect key="frame" x="313" y="571" width="21" height="21"/>
+                                <rect key="frame" x="168" y="255" width="21" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="7Rp-Fu-ZJM"/>
                                     <constraint firstAttribute="width" constant="21" id="ICr-Ky-JSM"/>
@@ -215,7 +215,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Stopwatch" id="QTW-uW-Xir"/>
                             </imageView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vr9-VQ-nGh">
-                                <rect key="frame" x="189" y="571" width="21" height="21"/>
+                                <rect key="frame" x="44" y="255" width="21" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Cx9-79-N0y"/>
                                     <constraint firstAttribute="width" constant="21" id="m5K-v0-ja2"/>
@@ -223,7 +223,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Mine" id="BKc-0W-YIf"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wRb-bm-1nx">
-                                <rect key="frame" x="148" y="573" width="40" height="17"/>
+                                <rect key="frame" x="3" y="257" width="40" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Mines" placeholderString="Mines" id="I20-Rx-xoE">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -234,7 +234,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerTextField" customModule="MineSweeper" customModuleProvider="target">
-                                <rect key="frame" x="335" y="573" width="34" height="17"/>
+                                <rect key="frame" x="190" y="257" width="34" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Time" id="l7h-6s-GxS">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -268,7 +268,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="706.5" y="383.5"/>
+            <point key="canvasLocation" x="74.5" y="720.5"/>
         </scene>
     </scenes>
     <resources>
