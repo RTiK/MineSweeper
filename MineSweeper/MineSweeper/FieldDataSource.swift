@@ -10,24 +10,25 @@ import Cocoa
 
 class FieldDataSource: NSObject {
     
-    var dataArray = [Int](count: 16 * 16, repeatedValue: 0)
+    var dataArray = [Int](repeating: 0, count: 16 * 16)
     var firstMove = false
     var width: Int!, height: Int!
-    dynamic var minesLeftCounter = 0
-    dynamic var gameOver = false
+    var minesLeftCounter = 0
+    var gameOver = false
 
-    var cellsToRefresh = Set<NSIndexPath>()
+    var cellsToRefresh = Set<IndexPath>()
     var incorrectCells = Set<Int>()
 
     @IBOutlet weak var fieldCollectionView: FieldCollectionView!
     @IBOutlet weak var timerLabel: TimerTextField!
+    @IBOutlet weak var minesLeftLabel: NSTextField!
 
     func resetGame() {
         let fieldSize = fieldCollectionView.getFieldSize()
         width = Int(fieldSize.width)
         height = Int(fieldSize.height)
         let numberOfMines = fieldCollectionView.getNumberOfMines()
-        dataArray = [Int](count: Int(width * height), repeatedValue: 0)
+        dataArray = [Int](repeating: 0, count: Int(width * height))
         placeMines(numberOfMines)
         minesLeftCounter = numberOfMines
         incorrectCells.removeAll()
@@ -36,7 +37,7 @@ class FieldDataSource: NSObject {
         gameOver = false
     }
 
-    private func placeMines(numberOfMInes: Int) {
+    private func placeMines(_ numberOfMInes: Int) {
         for _ in 1 ... numberOfMInes {
             placeMineAtRandom()
         }
@@ -51,11 +52,11 @@ class FieldDataSource: NSObject {
     }
 
     private func resolveIncorrect() {
-        cellsToRefresh = Set<NSIndexPath>()
+        cellsToRefresh = Set<IndexPath>()
         for cell in incorrectCells {
-            cellsToRefresh.insert(NSIndexPath(forItem: cell, inSection: 0))
+            cellsToRefresh.insert(IndexPath(item: cell, section: 0))
         }
-        fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
+        fieldCollectionView.reloadItems(at: cellsToRefresh)
     }
 
     private func resolveAll() {
@@ -68,14 +69,15 @@ class FieldDataSource: NSObject {
                 } else if numOfMines == 0 {
                     dataArray[cellIndex] = CellProperties.TYPE_VISITED
                 }
-                cellsToRefresh.insert(NSIndexPath(forItem: cellIndex, inSection: 0))
+                cellsToRefresh.insert(IndexPath(item: cellIndex, section: 0))
             }
         }
-        fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
+        fieldCollectionView.reloadItems(at: cellsToRefresh)
     }
 
-    func markMine(cellAtIndex: Int) {
+    func markMine(_ cellAtIndex: Int) {
         let currentCell = dataArray[cellAtIndex]
+        print(dataArray[cellAtIndex])
         if currentCell == CellProperties.TYPE_EMPTY {
             dataArray[cellAtIndex] = CellProperties.TYPE_EMPTY_FLAG
             minesLeftCounter -= 1
@@ -101,12 +103,12 @@ class FieldDataSource: NSObject {
             timerLabel.stop()
             resolveAll()
         }
-        fieldCollectionView.reloadItemsAtIndexPaths(
-            Set<NSIndexPath>(arrayLiteral: NSIndexPath(forItem: cellAtIndex, inSection: 0)))
+        fieldCollectionView.reloadItems(at: Set<IndexPath>(arrayLiteral: IndexPath(item: cellAtIndex, section: 0)))
+        minesLeftLabel.stringValue = String(minesLeftCounter)
     }
 
-    func uncover(cellWithIndex: Int) {
-        cellsToRefresh = Set<NSIndexPath>()
+    func uncover(_ cellWithIndex: Int) {
+        cellsToRefresh = Set<IndexPath>()
 
         let currentCell = dataArray[cellWithIndex]
         if firstMove {
@@ -116,7 +118,7 @@ class FieldDataSource: NSObject {
             }
             timerLabel.start()
             firstMove = false
-            cascade(cellWithIndex)
+            cascade(cellWithIndex, &cellsToRefresh)
         } else if (currentCell == CellProperties.TYPE_MINE) {
             timerLabel.stop()
             resolveIncorrect()
@@ -124,20 +126,21 @@ class FieldDataSource: NSObject {
             dataArray[cellWithIndex] = CellProperties.TYPE_MINE_EXPLODED
             fieldCollectionView.reloadData()
         } else if (currentCell == CellProperties.TYPE_EMPTY) {
-            cascade(cellWithIndex)
+            cascade(cellWithIndex, &cellsToRefresh)
         }
         if isSolved() {
             timerLabel.stop()
             resolveAll()
         }
-        fieldCollectionView.reloadItemsAtIndexPaths(cellsToRefresh)
+        fieldCollectionView.reloadItems(at: cellsToRefresh)
+        minesLeftLabel.stringValue = String(minesLeftCounter)
     }
 
     private func isSolved() -> Bool {
         return minesLeftCounter == 0 && incorrectCells.isEmpty
     }
 
-    private func countMines(atIndex: Int) -> Int {
+    private func countMines(_ atIndex: Int) -> Int {
         var mineCount = 0
         if canGoNorth(atIndex) {
             if dataArray[atIndex-width] == CellProperties.TYPE_MINE
@@ -184,7 +187,7 @@ class FieldDataSource: NSObject {
         return mineCount
     }
 
-    private func cascade(fromIndex: Int) {
+    private func cascade(_ fromIndex: Int, _ cellsToRefresh: inout Set<IndexPath>) {
         if dataArray[fromIndex] == CellProperties.TYPE_VISITED || dataArray[fromIndex] > 0 {
             return
         }
@@ -194,67 +197,65 @@ class FieldDataSource: NSObject {
         if mineCount == 0 {
             dataArray[fromIndex] = CellProperties.TYPE_VISITED
             if canGoNorth(fromIndex) {
-                cascade(fromIndex-width)
+                cascade(fromIndex-width, &cellsToRefresh)
                 if canGoEast(fromIndex) {
-                    cascade(fromIndex-(width-1))
+                    cascade(fromIndex-(width-1), &cellsToRefresh)
                 }
                 if canGoWest(fromIndex) {
-                    cascade(fromIndex-(width+1))
+                    cascade(fromIndex-(width+1), &cellsToRefresh)
                 }
             }
             if canGoSouth(fromIndex) {
-                cascade(fromIndex+width)
+                cascade(fromIndex+width, &cellsToRefresh)
                 if canGoEast(fromIndex) {
-                    cascade(fromIndex+(width+1))
+                    cascade(fromIndex+(width+1), &cellsToRefresh)
                 }
                 if canGoWest(fromIndex) {
-                    cascade(fromIndex+(width-1))
+                    cascade(fromIndex+(width-1), &cellsToRefresh)
                 }
             }
             if canGoEast(fromIndex) {
-                cascade(fromIndex+1)
+                cascade(fromIndex+1, &cellsToRefresh)
             }
             if canGoWest(fromIndex) {
-                cascade(fromIndex-1)
+                cascade(fromIndex-1, &cellsToRefresh)
             }
         } else {
             dataArray[fromIndex] = mineCount
         }
-        cellsToRefresh.insert(NSIndexPath(forItem: fromIndex, inSection: 0))
+        cellsToRefresh.insert(IndexPath(item: fromIndex, section: 0))
 
     }
 
-    private func canGoWest(fromIndex: Int) -> Bool {
+    private func canGoWest(_ fromIndex: Int) -> Bool {
         return fromIndex % width > 0
     }
 
-    private func canGoEast(fromIndex:Int) -> Bool {
+    private func canGoEast(_ fromIndex:Int) -> Bool {
         return fromIndex % width < (width - 1)
     }
 
-    private func canGoNorth(fromIndex: Int) -> Bool {
+    private func canGoNorth(_ fromIndex: Int) -> Bool {
         return fromIndex > width - 1
     }
 
-    private func canGoSouth(fromIndex: Int) -> Bool {
+    private func canGoSouth(_ fromIndex: Int) -> Bool {
         return fromIndex < (width * (height - 1))
     }
 }
 
 extension FieldDataSource: NSCollectionViewDataSource {
 
-    func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem {
-        let item = collectionView.makeItemWithIdentifier("cellItem", forIndexPath: indexPath) as! CellCollectionViewItem
+    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cellItem"), for: indexPath) as! CellCollectionViewItem
+        item.value = dataArray[indexPath[1]]
         item.dataSource = self
-        item.index = indexPath.indexAtPosition(1)
+        item.index = indexPath[1]
         item.disabled = gameOver
-        if dataArray.count > 0 {
-            item.representedObject = dataArray[indexPath.indexAtPosition(1)]
-        }
         return item
     }
 
-    func collectionView(collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataArray.count
     }
 

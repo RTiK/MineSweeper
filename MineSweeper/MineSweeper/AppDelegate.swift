@@ -9,31 +9,35 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSResponder, NSApplicationDelegate {
 
     //var windowController: WindowController?
     var fieldCollectionView: FieldCollectionView?
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
     
     // in case the game window has been closed the actions from the menu will be caught
-    // here these methods will instantiate a new window and pass the field size to it
-    func prepareBeginnerGame(sender: NSMenuItem) {
+    // here, these methods will instantiate a new window
+    @IBAction func prepareBeginnerGame(_ sender: NSMenuItem) {
         fieldCollectionView?.prepareBeginnerGame(sender)
     }
 
-    func prepareIntermediateGame(sender: NSMenuItem) {
+    @IBAction func prepareIntermediateGame(_ sender: NSMenuItem) {
         fieldCollectionView?.prepareIntermediateGame(sender)
     }
     
-    func prepareExpertGame(sender: NSMenuItem) {
+    @IBAction func prepareExpertGame(_ sender: NSMenuItem) {
         fieldCollectionView?.prepareExpertGame(sender)
+    }
+
+    @IBAction func resetGame(_ sender: NSMenuItem) {
+        fieldCollectionView?.resetGame(sender)
     }
 }
 

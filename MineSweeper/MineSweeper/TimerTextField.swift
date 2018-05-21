@@ -14,17 +14,17 @@ class TimerTextField: NSTextField {
             stringValue = String(counter)
         }
     }
-    var timer: NSTimer!
+    var timer: Timer!
 
     func start() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(self.tick), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: self.tick)
     }
 
     func stop() {
         timer.invalidate()
     }
 
-    func tick() {
+    func tick(_ timer:Timer) {
         counter += 1
         if counter == 999 {
             stop()  // you fell asleep

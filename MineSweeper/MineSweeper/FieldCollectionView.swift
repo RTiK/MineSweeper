@@ -10,11 +10,11 @@ import Cocoa
 
 class FieldCollectionView: NSCollectionView {
 
-    private var fieldDimensions = NSSize(width: 1, height: 1)
-    private var numberOfMines = 0
+    fileprivate var fieldDimensions = NSSize(width: 1, height: 1)
+    fileprivate var numberOfMines = 0
 
     override func awakeFromNib() {
-        registerNib(NSNib(nibNamed: "CellCollectionViewItem", bundle: nil), forItemWithIdentifier: "cellItem")
+        register(NSNib(nibNamed: NSNib.Name(rawValue: "CellCollectionViewItem"), bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cellItem"))
         let appDelegate = NSApp.delegate as! AppDelegate
         appDelegate.fieldCollectionView = self
 
@@ -27,28 +27,32 @@ class FieldCollectionView: NSCollectionView {
          return true
     }
 
-    func prepareBeginnerGame(sender: NSMenuItem) {
+    func prepareBeginnerGame(_ sender: NSMenuItem) {
         setGameParams(NSSize(width: 9, height: 9), mines: 10)
         resetGame(sender)
     }
 
-    func prepareIntermediateGame(sender: NSMenuItem) {
+    func prepareIntermediateGame(_ sender: NSMenuItem) {
         setGameParams(NSSize(width: 16, height: 16), mines: 40)
         resetGame(sender)
     }
 
-    func prepareExpertGame(sender: NSMenuItem) {
+    func prepareExpertGame(_ sender: NSMenuItem) {
         setGameParams(NSSize(width: 30, height: 16), mines: 99)
         resetGame(sender)
     }
 
-    private func setGameParams(size: NSSize, mines: Int) {
+    private func setGameParams(_ size: NSSize, mines: Int) {
         fieldDimensions = size
         numberOfMines = mines
     }
 
-    func resetGame(sender: AnyObject) {
-        collectionViewLayout?.prepareLayout()
+    @IBAction func reset(button: NSButton) {
+        resetGame(button)
+    }
+
+    func resetGame(_ sender: AnyObject) {
+        collectionViewLayout?.prepare()
         (self.dataSource as! FieldDataSource).resetGame()
         reloadData()
         window?.setContentSize(NSSize(
