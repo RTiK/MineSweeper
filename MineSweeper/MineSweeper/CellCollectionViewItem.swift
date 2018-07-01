@@ -32,9 +32,8 @@ class CellCollectionViewItem: NSCollectionViewItem {
         } else if cellType == CellProperties.TYPE_MINE {
             cellColor = CellProperties.COLOR_CELL_EMPTY
         } else if (cellType == CellProperties.TYPE_EMPTY_QUESTION || cellType == CellProperties.TYPE_MINE_QUESTION) {
-            cellTextColor = NSColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
             cellText = "?"
-            cellColor = CellProperties.COLOR_CELL_GREEN
+            cellColor = CellProperties.COLOR_CELL_ORANGE
         }
 
         if (disabled != nil && disabled) {    // display game over state

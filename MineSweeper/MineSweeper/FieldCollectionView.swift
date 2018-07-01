@@ -23,10 +23,6 @@ class FieldCollectionView: NSCollectionView {
         resetGame(self)
     }
 
-    override var acceptsFirstResponder: Bool {
-         return true
-    }
-
     func prepareBeginnerGame(_ sender: NSMenuItem) {
         setGameParams(NSSize(width: 9, height: 9), mines: 10)
         resetGame(sender)

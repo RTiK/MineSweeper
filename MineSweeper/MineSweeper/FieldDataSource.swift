@@ -77,7 +77,6 @@ class FieldDataSource: NSObject {
 
     func markMine(_ cellAtIndex: Int) {
         let currentCell = dataArray[cellAtIndex]
-        print(dataArray[cellAtIndex])
         if currentCell == CellProperties.TYPE_EMPTY {
             dataArray[cellAtIndex] = CellProperties.TYPE_EMPTY_FLAG
             minesLeftCounter -= 1
