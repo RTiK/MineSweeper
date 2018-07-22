@@ -135,6 +135,73 @@ class FieldDataSource: NSObject {
         minesLeftLabel.stringValue = String(minesLeftCounter)
     }
 
+    func uncoverNeighborsOf(_ cellWithIndex: Int) {
+        if dataArray[cellWithIndex] == CellProperties.TYPE_MINE_FLAG || dataArray[cellWithIndex] == CellProperties.TYPE_MINE_QUESTION {
+            return
+        }
+        var minesSurrounding = 0
+        if canGoNorth(cellWithIndex) {
+            if dataArray[cellWithIndex - width] == CellProperties.TYPE_MINE_FLAG {
+                minesSurrounding += 1
+            }
+            if canGoEast(cellWithIndex)
+                && dataArray[cellWithIndex - (width - 1)] == CellProperties.TYPE_MINE_FLAG {
+                minesSurrounding += 1
+            }
+            if canGoWest(cellWithIndex)
+                && dataArray[cellWithIndex - (width + 1)] == CellProperties.TYPE_MINE_FLAG {
+                minesSurrounding += 1
+            }
+        }
+        if canGoSouth(cellWithIndex) {
+            if dataArray[cellWithIndex + width ] == CellProperties.TYPE_MINE_FLAG {
+                minesSurrounding += 1
+            }
+            if canGoEast(cellWithIndex+(width+1))
+                && dataArray[cellWithIndex+(width+1)] == CellProperties.TYPE_MINE_FLAG {
+                minesSurrounding += 1
+            }
+            if canGoWest(cellWithIndex+(width-1))
+                && dataArray[cellWithIndex+(width-1)] == CellProperties.TYPE_MINE_FLAG {
+                minesSurrounding += 1
+            }
+        }
+        if canGoEast(cellWithIndex)
+            && dataArray[cellWithIndex+1] == CellProperties.TYPE_MINE_FLAG {
+            minesSurrounding += 1
+        }
+        if canGoWest(cellWithIndex)
+            && dataArray[cellWithIndex-1] == CellProperties.TYPE_MINE_FLAG {
+            minesSurrounding += 1
+        }
+        if minesSurrounding >= dataArray[cellWithIndex] {
+            if canGoNorth(cellWithIndex) {
+                uncover(cellWithIndex - width)
+                if canGoEast(cellWithIndex) {
+                    uncover(cellWithIndex - (width - 1))
+                }
+                if canGoWest(cellWithIndex) {
+                    uncover(cellWithIndex - (width + 1))
+                }
+            }
+            if canGoSouth(cellWithIndex) {
+                uncover(cellWithIndex + width)
+                if canGoEast(cellWithIndex) {
+                    uncover(cellWithIndex + (width + 1))
+                }
+                if canGoWest(cellWithIndex) {
+                    uncover(cellWithIndex + (width - 1))
+                }
+            }
+            if canGoEast(cellWithIndex) {
+                uncover(cellWithIndex + 1)
+            }
+            if canGoNorth(cellWithIndex) {
+                uncover(cellWithIndex - 1)
+            }
+        }
+    }
+
     private func isSolved() -> Bool {
         return minesLeftCounter == 0 && incorrectCells.isEmpty
     }
@@ -187,9 +254,12 @@ class FieldDataSource: NSObject {
     }
 
     private func cascade(_ fromIndex: Int, _ cellsToRefresh: inout Set<IndexPath>) {
-        if dataArray[fromIndex] == CellProperties.TYPE_VISITED || dataArray[fromIndex] > 0 {
+        if dataArray[fromIndex] != 0 {
             return
         }
+//        if dataArray[fromIndex] == CellProperties.TYPE_VISITED || dataArray[fromIndex] > 0 {
+//            return
+//        }
 
         let mineCount = countMines(fromIndex)
         // Set visited

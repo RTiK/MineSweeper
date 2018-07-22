@@ -68,6 +68,9 @@ class CellCollectionViewItem: NSCollectionViewItem {
     override func mouseUp(with theEvent: NSEvent) {
         if !disabled {
             dataSource.uncover(index)
+            if theEvent.clickCount > 1 {
+                dataSource.uncoverNeighborsOf(index)
+            }
         }
     }
 
