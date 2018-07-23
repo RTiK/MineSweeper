@@ -14,7 +14,8 @@ class FieldCollectionView: NSCollectionView {
     fileprivate var numberOfMines = 0
 
     override func awakeFromNib() {
-        register(NSNib(nibNamed: NSNib.Name(rawValue: "CellCollectionViewItem"), bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cellItem"))
+        register(NSNib(nibNamed: NSNib.Name(rawValue: "CellCollectionViewItem"), bundle: nil),
+                 forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cellItem"))
         let appDelegate = NSApp.delegate as! AppDelegate
         appDelegate.fieldCollectionView = self
 

@@ -22,6 +22,7 @@ class FieldDataSource: NSObject {
     @IBOutlet weak var fieldCollectionView: FieldCollectionView!
     @IBOutlet weak var timerLabel: TimerTextField!
     @IBOutlet weak var minesLeftLabel: NSTextField!
+    @IBOutlet weak var resetButton: NSButton!
 
     func resetGame() {
         let fieldSize = fieldCollectionView.getFieldSize()
@@ -35,6 +36,7 @@ class FieldDataSource: NSObject {
         timerLabel.reset()
         firstMove = true
         gameOver = false
+        resetButton.title = "Reset"
     }
 
     private func placeMines(_ numberOfMInes: Int) {
@@ -101,6 +103,8 @@ class FieldDataSource: NSObject {
         if isSolved() {
             timerLabel.stop()
             resolveAll()
+            //gameOver = true
+            resetButton.title = "Play Again"
         }
         fieldCollectionView.reloadItems(at: Set<IndexPath>(arrayLiteral: IndexPath(item: cellAtIndex, section: 0)))
         minesLeftLabel.stringValue = String(minesLeftCounter)
@@ -130,6 +134,8 @@ class FieldDataSource: NSObject {
         if isSolved() {
             timerLabel.stop()
             resolveAll()
+            //gameOver = true
+            resetButton.title = "Play Again"
         }
         fieldCollectionView.reloadItems(at: cellsToRefresh)
         minesLeftLabel.stringValue = String(minesLeftCounter)
