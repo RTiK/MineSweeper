@@ -202,7 +202,7 @@ class FieldDataSource: NSObject {
             if canGoEast(cellWithIndex) {
                 uncover(cellWithIndex + 1)
             }
-            if canGoNorth(cellWithIndex) {
+            if canGoWest(cellWithIndex) {
                 uncover(cellWithIndex - 1)
             }
         }
