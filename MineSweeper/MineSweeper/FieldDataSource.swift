@@ -33,10 +33,10 @@ class FieldDataSource: NSObject {
         placeMines(numberOfMines)
         minesLeftCounter = numberOfMines
         incorrectCells.removeAll()
-        timerLabel.reset()
+        //timerLabel.reset()
         firstMove = true
         gameOver = false
-        resetButton.title = "Reset"
+        //resetButton.title = "Reset"
     }
 
     private func placeMines(_ numberOfMInes: Int) {
@@ -104,7 +104,7 @@ class FieldDataSource: NSObject {
             timerLabel.stop()
             resolveAll()
             //gameOver = true
-            resetButton.title = "Play Again"
+            //resetButton.title = "Play Again"
         }
         fieldCollectionView.reloadItems(at: Set<IndexPath>(arrayLiteral: IndexPath(item: cellAtIndex, section: 0)))
         minesLeftLabel.stringValue = String(minesLeftCounter)
@@ -119,11 +119,11 @@ class FieldDataSource: NSObject {
                 dataArray[cellWithIndex] = CellProperties.TYPE_EMPTY    // a mine should not be uncovered on first click
                 placeMineAtRandom()                                     // it should be moved to a random free position instead
             }
-            timerLabel.start()
+            //timerLabel.start()
             firstMove = false
             cascade(cellWithIndex, &cellsToRefresh)
         } else if (currentCell == CellProperties.TYPE_MINE) {
-            timerLabel.stop()
+            //timerLabel.stop()
             resolveIncorrect()
             gameOver = true
             dataArray[cellWithIndex] = CellProperties.TYPE_MINE_EXPLODED
@@ -132,7 +132,7 @@ class FieldDataSource: NSObject {
             cascade(cellWithIndex, &cellsToRefresh)
         }
         if isSolved() {
-            timerLabel.stop()
+            //timerLabel.stop()
             resolveAll()
             //gameOver = true
             resetButton.title = "Play Again"
@@ -314,7 +314,7 @@ class FieldDataSource: NSObject {
         return fromIndex > width - 1
     }
 
-    private func canGoSouth(_ fromIndex: Int) -> Bool {
+    private func canGoSouth(_ fromIndex: Int) -> Bool { 
         return fromIndex < (width * (height - 1))
     }
 }

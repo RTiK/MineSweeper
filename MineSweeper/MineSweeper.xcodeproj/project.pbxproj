@@ -10,6 +10,7 @@
 		7344D2911CDF70E70038E529 /* TimerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7344D2901CDF70E70038E529 /* TimerTextField.swift */; };
 		736945F81CEA5CEE00FFC068 /* Stopwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = 736945F71CEA5CEE00FFC068 /* Stopwatch.png */; };
 		737181281CEE6C8D005955A3 /* AppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 737181271CEE6C8D005955A3 /* AppIcon.png */; };
+		737386592288393100B56FD7 /* FieldGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737386582288393100B56FD7 /* FieldGrid.swift */; };
 		73739E681CDD12F1007D4156 /* FieldDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73739E671CDD12F1007D4156 /* FieldDataSource.swift */; };
 		73739E6A1CDD135B007D4156 /* FieldGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73739E691CDD135B007D4156 /* FieldGridLayout.swift */; };
 		73739E6C1CDD1646007D4156 /* FieldCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73739E6B1CDD1646007D4156 /* FieldCollectionView.swift */; };
@@ -27,6 +28,7 @@
 		7344D2901CDF70E70038E529 /* TimerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerTextField.swift; sourceTree = "<group>"; };
 		736945F71CEA5CEE00FFC068 /* Stopwatch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stopwatch.png; sourceTree = "<group>"; };
 		737181271CEE6C8D005955A3 /* AppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon.png; sourceTree = "<group>"; };
+		737386582288393100B56FD7 /* FieldGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldGrid.swift; sourceTree = "<group>"; };
 		73739E671CDD12F1007D4156 /* FieldDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldDataSource.swift; sourceTree = "<group>"; };
 		73739E691CDD135B007D4156 /* FieldGridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldGridLayout.swift; sourceTree = "<group>"; };
 		73739E6B1CDD1646007D4156 /* FieldCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldCollectionView.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				73D89F281CD0D73800EF75A4 /* Assets.xcassets */,
 				73D89F331CD0D9D800EF75A4 /* CellCollectionViewItem.xib */,
 				73D89F2A1CD0D73800EF75A4 /* Main.storyboard */,
+				737386582288393100B56FD7 /* FieldGrid.swift */,
 			);
 			path = MineSweeper;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -184,6 +188,7 @@
 				73739E721CDF3D60007D4156 /* CellProperties.swift in Sources */,
 				73D89F251CD0D73800EF75A4 /* AppDelegate.swift in Sources */,
 				73739E701CDF3D26007D4156 /* CellCollectionViewItem.swift in Sources */,
+				737386592288393100B56FD7 /* FieldGrid.swift in Sources */,
 				73739E6C1CDD1646007D4156 /* FieldCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,7 +261,7 @@
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -307,7 +312,7 @@
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -150,7 +149,7 @@
         <scene sceneID="z2G-aF-l0t">
             <objects>
                 <windowController id="dQR-So-5Jc" sceneMemberID="viewController">
-                    <window key="window" title="About MineSweeper" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="cMd-fX-lvX">
+                    <window key="window" title="About MineSweeper" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="cMd-fX-lvX">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="-2836" y="461" width="296" height="104"/>
@@ -162,7 +161,7 @@
                 </windowController>
                 <customObject id="zI7-Ni-S80" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="536" y="406"/>
+            <point key="canvasLocation" x="536" y="231"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ciN-L1-MHd">
@@ -218,23 +217,108 @@
                 </viewController>
                 <customObject id="HsV-SZ-aMs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="537" y="744"/>
+            <point key="canvasLocation" x="537" y="575"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" customClass="WindowController" customModule="MineSweeper" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="235" y="529" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <toolbar key="toolbar" implicitIdentifier="3B90AA76-EE2D-4410-81FB-B4515C41320A" autosavesConfiguration="NO" allowsUserCustomization="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="small" id="tcw-Eu-xlW">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="FE92D4D3-5444-4A8E-99BC-9F3AC76A55CB" label="" paletteLabel="Start Button" sizingBehavior="auto" id="9ww-uX-JTe">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="hQA-NM-Xwt">
+                                        <rect key="frame" x="0.0" y="14" width="82" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HdP-V8-0QV">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="1137D9A4-472B-4401-9820-53C8737B8C49" label="Custom View" paletteLabel="Custom View" sizingBehavior="auto" id="3Ws-C3-kJM">
+                                    <nil key="toolTip"/>
+                                    <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="1lw-Ih-O6b">
+                                        <rect key="frame" x="0.0" y="14" width="76" height="17"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="MinesLabel" id="oIj-1j-ahK">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="5C3A7AFF-2646-4DD8-9CD6-45297636A3F9" label="Custom View" paletteLabel="Custom View" sizingBehavior="auto" id="vD5-FS-Yaz">
+                                    <nil key="toolTip"/>
+                                    <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="qcQ-4q-YEX" customClass="TimerTextField" customModule="MineSweeper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="14" width="76" height="17"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="TimerLabel" id="5I2-8y-D0I">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="VT7-SJ-7rs"/>
+                                <toolbarItem implicitItemIdentifier="237F23B5-4187-46AC-B77E-A02D05D5310E" label="Mines Label" paletteLabel="Mines Label" id="E2N-lU-SCK">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="30" height="22"/>
+                                    <size key="maxSize" width="30" height="22"/>
+                                    <textField key="view" verticalHuggingPriority="750" preferredMaxLayoutWidth="30" textCompletion="NO" id="IsR-Dv-Cqv">
+                                        <rect key="frame" x="20" y="14" width="30" height="22"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" borderStyle="bezel" bezelStyle="round" id="u70-WI-Ez8">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="04C81B09-8B93-490D-ACDF-EADF25F1C76F" label="Timer Label" paletteLabel="Timer Label" id="eeY-09-Pqn">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="30" height="22"/>
+                                    <size key="maxSize" width="30" height="22"/>
+                                    <textField key="view" verticalHuggingPriority="750" preferredMaxLayoutWidth="30" textCompletion="NO" id="xnG-pN-lQ1">
+                                        <rect key="frame" x="20" y="14" width="30" height="22"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" bezelStyle="round" id="Yuk-u6-6IK">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="C372F2DE-BBB1-48EB-A32A-35E562B09D02" label="Mine Icon" paletteLabel="Mine Icon" tag="-1" image="Mine" id="3U9-NN-bun">
+                                    <size key="minSize" width="16" height="16"/>
+                                    <size key="maxSize" width="16" height="16"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="0EE8F441-6C54-4A36-BF9D-E11B095F1F1E" label="Timer Icon" paletteLabel="Timer Icon" tag="-1" image="Stopwatch" id="0rf-LG-TDD">
+                                    <size key="minSize" width="16" height="16"/>
+                                    <size key="maxSize" width="16" height="16"/>
+                                </toolbarItem>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="VT7-SJ-7rs"/>
+                                <toolbarItem reference="E2N-lU-SCK"/>
+                                <toolbarItem reference="3U9-NN-bun"/>
+                                <toolbarItem reference="9ww-uX-JTe"/>
+                                <toolbarItem reference="0rf-LG-TDD"/>
+                                <toolbarItem reference="eeY-09-Pqn"/>
+                                <toolbarItem reference="VT7-SJ-7rs"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="Kk1-iu-5Qg"/>
                         </connections>
                     </window>
                     <connections>
-                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                        <segue destination="kUb-OZ-Kkd" kind="relationship" relationship="window.shadowedContentViewController" id="t1Q-4W-2Od"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -245,7 +329,7 @@
         <scene sceneID="GKJ-9N-o7I">
             <objects>
                 <windowController id="4lc-WH-WjX" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titleVisibility="hidden" id="DJV-yV-imV">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titleVisibility="hidden" id="DJV-yV-imV">
                         <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="-2631" y="595" width="275" height="136"/>
@@ -260,7 +344,7 @@
                 </windowController>
                 <customObject id="faP-Li-mhN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-600" y="231"/>
+            <point key="canvasLocation" x="-600.5" y="231"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="YhR-t3-Xf1">
@@ -347,20 +431,21 @@
             <point key="canvasLocation" x="-599.5" y="565.5"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="hIz-AP-VOD">
+        <scene sceneID="bEv-gq-JgX">
             <objects>
-                <viewController id="XfG-lQ-9wD" sceneMemberID="viewController">
-                    <visualEffectView key="view" appearanceType="vibrantDark" blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" id="Dio-us-J1L">
-                        <rect key="frame" x="0.0" y="0.0" width="233" height="301"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                <viewController id="kUb-OZ-Kkd" sceneMemberID="viewController">
+                    <view key="view" id="qbs-6f-yeM">
+                        <rect key="frame" x="0.0" y="0.0" width="233" height="235"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" borderType="line" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" findBarPosition="belowContent" translatesAutoresizingMaskIntoConstraints="NO" id="LKe-2i-TKc">
+                            <scrollView horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" fixedFrame="YES" borderType="line" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" findBarPosition="belowContent" translatesAutoresizingMaskIntoConstraints="NO" id="LKe-2i-TKc">
                                 <rect key="frame" x="0.0" y="0.0" width="233" height="235"/>
-                                <clipView key="contentView" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" drawsBackground="NO" copiesOnScroll="NO" id="hPo-A3-Ins">
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <clipView key="contentView" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="hPo-A3-Ins">
                                     <rect key="frame" x="1" y="1" width="231" height="233"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <collectionView id="WiJ-Sb-zbh" customClass="FieldCollectionView" customModule="MineSweeper" customModuleProvider="target">
+                                        <collectionView ambiguous="YES" id="WiJ-Sb-zbh" customClass="FieldCollectionView" customModule="MineSweeper" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="231" height="233"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <collectionViewLayout key="collectionViewLayout" id="bOo-lN-sY9" customClass="FieldGridLayout" customModule="MineSweeper" customModuleProvider="target"/>
@@ -372,87 +457,26 @@
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1rU-jc-UCc">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1rU-jc-UCc">
                                     <rect key="frame" x="1" y="144" width="233" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="OFI-nL-Ljm">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="OFI-nL-Ljm">
                                     <rect key="frame" x="234" y="1" width="15" height="143"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pVe-Eg-LOl">
-                                <rect key="frame" x="79" y="248" width="75" height="32"/>
-                                <buttonCell key="cell" type="push" title="Reset" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v8u-lu-Amt">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="resetWithButton:" target="WiJ-Sb-zbh" id="KDh-12-8Hh"/>
-                                </connections>
-                            </button>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zjy-M5-8km">
-                                <rect key="frame" x="168" y="255" width="21" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="7Rp-Fu-ZJM"/>
-                                    <constraint firstAttribute="width" constant="21" id="ICr-Ky-JSM"/>
-                                </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Stopwatch" id="QTW-uW-Xir"/>
-                            </imageView>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vr9-VQ-nGh">
-                                <rect key="frame" x="44" y="255" width="21" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="Cx9-79-N0y"/>
-                                    <constraint firstAttribute="width" constant="21" id="m5K-v0-ja2"/>
-                                </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Mine" id="BKc-0W-YIf"/>
-                            </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wRb-bm-1nx">
-                                <rect key="frame" x="3" y="257" width="40" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Mines" placeholderString="Mines" id="I20-Rx-xoE">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WFA-bY-VTB" customClass="TimerTextField" customModule="MineSweeper" customModuleProvider="target">
-                                <rect key="frame" x="190" y="257" width="34" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Time" id="l7h-6s-GxS">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
-                        <constraints>
-                            <constraint firstItem="Zjy-M5-8km" firstAttribute="leading" secondItem="pVe-Eg-LOl" secondAttribute="trailing" constant="20" id="0ka-Wq-hur"/>
-                            <constraint firstAttribute="bottom" secondItem="LKe-2i-TKc" secondAttribute="bottom" id="23b-bx-0jc"/>
-                            <constraint firstItem="pVe-Eg-LOl" firstAttribute="leading" secondItem="Vr9-VQ-nGh" secondAttribute="trailing" constant="20" id="2OO-LS-KAf"/>
-                            <constraint firstItem="pVe-Eg-LOl" firstAttribute="centerX" secondItem="Dio-us-J1L" secondAttribute="centerX" id="DjN-65-V8U"/>
-                            <constraint firstItem="WFA-bY-VTB" firstAttribute="leading" secondItem="Zjy-M5-8km" secondAttribute="trailing" constant="3" id="Ex2-ea-Xs7"/>
-                            <constraint firstItem="wRb-bm-1nx" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="27" id="HT1-pc-csn"/>
-                            <constraint firstAttribute="trailing" secondItem="LKe-2i-TKc" secondAttribute="trailing" id="IOD-PX-qSS"/>
-                            <constraint firstItem="Vr9-VQ-nGh" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="25" id="QN8-Ki-u7M"/>
-                            <constraint firstItem="LKe-2i-TKc" firstAttribute="leading" secondItem="Dio-us-J1L" secondAttribute="leading" id="Sda-Sc-vdZ"/>
-                            <constraint firstItem="WFA-bY-VTB" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="27" id="Yph-uM-Xt9"/>
-                            <constraint firstItem="LKe-2i-TKc" firstAttribute="top" secondItem="pVe-Eg-LOl" secondAttribute="bottom" constant="20" id="Z8d-t8-BFV"/>
-                            <constraint firstItem="Zjy-M5-8km" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="25" id="q36-cW-iD2"/>
-                            <constraint firstItem="pVe-Eg-LOl" firstAttribute="top" secondItem="Dio-us-J1L" secondAttribute="top" constant="25" id="qVV-Nx-HXr"/>
-                            <constraint firstItem="Vr9-VQ-nGh" firstAttribute="leading" secondItem="wRb-bm-1nx" secondAttribute="trailing" constant="3" id="rwv-ur-SxC"/>
-                        </constraints>
-                    </visualEffectView>
+                    </view>
                 </viewController>
-                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="GYP-gu-Wr7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customObject id="OI3-ya-8Pj" customClass="FieldDataSource" customModule="MineSweeper" customModuleProvider="target">
                     <connections>
                         <outlet property="fieldCollectionView" destination="WiJ-Sb-zbh" id="Bfu-ls-b9s"/>
-                        <outlet property="minesLeftLabel" destination="wRb-bm-1nx" id="utV-iz-W7E"/>
-                        <outlet property="resetButton" destination="pVe-Eg-LOl" id="uM7-j5-IlP"/>
-                        <outlet property="timerLabel" destination="WFA-bY-VTB" id="Sr1-2R-f94"/>
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="7" y="603"/>
+            <point key="canvasLocation" x="6.5" y="614.5"/>
         </scene>
     </scenes>
     <resources>
